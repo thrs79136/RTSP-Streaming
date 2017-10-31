@@ -1,3 +1,3 @@
 # RTSP-Streaming
-Beleg Videostreaming für Internettechnologien 2
+Beleg Videostreaming für das Modul Internettechnologien 2
 
