@@ -9,3 +9,5 @@ Ergänzen Sie die Klasse RTPpacket entsprechend der in der Projektbeschreibung u
 
 ## Teilaufgabe 3
 Ergänzen Sie die RTSP-Methoden OPTIONS und DESCRIBE anhand der Beispiele aus RFC 2326, RFC 2327 und RFC 5109. Es ist ausreichend, sich bei DESCRIBE auf das Beispielvideo zu beziehen.
+
+## Teil 4
