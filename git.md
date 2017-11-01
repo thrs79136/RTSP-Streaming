@@ -34,3 +34,7 @@ entferntes Repro mit lokalem Repro abgleichen
 
 `git help clone`
 
+Git-Übersicht (https://jan-krueger.net/wordpress/wp-content/uploads/2007/09/git-cheat-sheet.pdf)
+
+Das Git-Buch (kostenlos)  (http://gitbu.ch/)
+
