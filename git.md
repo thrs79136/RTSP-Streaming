@@ -24,10 +24,25 @@ alle Dateien im Arbeitsverzeichnis mit lokalem Repr. verknüpfen
 `git add .`
 
 Änderungen ins lokale Repr. übergeben  
-`git commit`
+`git commit`  oder  `git commit -m "kurze Angabe der Änderungen"`
 
 entferntes Repro mit lokalem Repro abgleichen  
 `git push origin`
+
+## Arbeitserleichterung
+Die globale Konfigurationsdatei der ignorierten Dateien befindet sich in `~/.gitignore`.
+Hier können alle unerwünschten Dateiendungen wie z.B. `*.class *.*~ *.out` aufgelistet werden.
+
+Die globale Konfiguration befindet sich in ~/.gitconfig
+
+Konfiguration auflisten  
+`git config -l`
+
+Git-Usernamen  
+`git config --global url."https://yourusername@github.com".insteadOf "https://github.com"`
+
+Git-Passwort cachen  
+`git config --global credential.helper 'cache –timeout=5400'`
 
 ## Hilfe
 `git help`
