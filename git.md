@@ -44,6 +44,10 @@ Git-Usernamen  
 Git-Passwort cachen  
 `git config --global credential.helper 'cache –timeout=5400'`
 
+
+## GUI
+Manchmal ist es sinnvoll, eventuelle Verzweigungen grafisch darzustellen. Hierfür werden zwei Tools bereitgestellt: `gitk` und `smartgit`.
+
 ## Hilfe
 `git help`
 
