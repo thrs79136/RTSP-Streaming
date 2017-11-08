@@ -61,3 +61,4 @@ Git-Übersicht (https://jan-krueger.net/wordpress/wp-content/uploads/2007/09/git
 
 Das Git-Buch (kostenlos)  (http://gitbu.ch/)
 
+Cheat Sheet
