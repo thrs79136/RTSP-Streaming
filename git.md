@@ -2,7 +2,7 @@
 
 
 ## eigenes privates Repository erstellen
-Erzeugen Sie auf HTWDD-RN ein eigenes privates Repository mit einem Namen entsprechend Ihrer S-NUmmer in der Form `sXXXX-it2-beleg`. Fügen Sie als Kommentar Ihren Namen hinzu, um die Zuordnung zu erleichtern.
+Erzeugen Sie auf HTWDD-RN ein eigenes privates Repository mit einem Namen entsprechend Ihrer S-NUmmer in der Form `sXXXX-it2-beleg`. Fügen Sie als Kommentar Ihren **Namen** hinzu, um die Zuordnung zu erleichtern.
 
 ## eigenes Repository verknüpfen
 
