@@ -13,12 +13,12 @@ Wechsel in das angelegte lokale Repository
 Umbenennen des Alias des originalen Repositories     
 `git remote rename origin htw-upstream`
 
-Anlegen der Verknüpfung (origin) mit dem eigenen entfernten Repository  
+Anlegen der Verknüpfung (origin) mit dem eigenen entfernten Repository  
+`git remote add [alias] [url]`
 `git remote add origin https://github.com/HTWDD-RN/sxxxxx-it2-beleg`
 
 Aktualisierung des eigenen entfernten Repositories  
 `git push origin master`
-
 
 ## Dateien für die Versionierung auswählen
 Dateien im Arbeitsverzeichnis mit lokalem Repr. verknüpfen  
@@ -42,6 +42,7 @@ alle Änderungen an den versionierten Dateien ins lokale Repr. übergeben
 Änderungen in lokalen Branch zusammenführen  `git merge [alias] [branch]`  
 lokale Änderungen des Repros ins entfernte Repro übernehmen    
 `git push [alias][branch]`  z.B. `git push orign master`
+
 
 ## Status
 * Anzeige aller neuen oder geänderten Dateien `git status`
@@ -71,31 +72,22 @@ Dazu eignet sich der Zwischenspeicher.
 * Holen der letzen Speicherung `git stash pop`
 * Anzeigen des Speichers `git stash list`
 
-
 ## Arbeitserleichterung
 Die globale Konfigurationsdatei der ignorierten Dateien befindet sich in `~/.gitignore`.
 Hier können alle unerwünschten Dateiendungen wie z.B. `*.class *.*~ *.out *.log bin/  tmp*` aufgelistet werden.
 
-Die globale Konfiguration befindet sich in ~/.gitconfig
-
-Konfiguration auflisten  
-`git config -l`
-
-Git-Usernamen  
-`git config --global url."https://yourusername@github.com".insteadOf "https://github.com"`
-
-Git-Passwort cachen  
-`git config --global credential.helper 'cache –timeout=5400'`
+Die globale Konfiguration befindet sich in ~/.gitconfig  
+* Konfiguration auflisten  `git config -l`
+* Git-Usernamen  `git config --global url."https://yourusername@github.com".insteadOf "https://github.com"`
+* Git-Passwort cachen  `git config --global credential.helper 'cache –timeout=5400'`
 
 ## GUI
 Manchmal ist es sinnvoll, eventuelle Verzweigungen grafisch darzustellen. Hierfür werden zwei Tools bereitgestellt: `gitk` und `smartgit`.
 
 ## Hilfe
-`git help`
+`git help`  
+`git help befehl`
 
-`git help clone`
-
-Git-Übersicht (https://jan-krueger.net/wordpress/wp-content/uploads/2007/09/git-cheat-sheet.pdf)
-
-Das Git-Buch (kostenlos)  (http://gitbu.ch/)
+* Git-Übersicht (https://jan-krueger.net/wordpress/wp-content/uploads/2007/09/git-cheat-sheet.pdf)
+* Das Git-Buch (kostenlos)  (http://gitbu.ch/)
 
