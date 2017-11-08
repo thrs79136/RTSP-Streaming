@@ -29,11 +29,12 @@ alle Änderungen an den versionierten Dateien ins lokale Repr. übergeben
 `git commit -a`  oder  `git commit -a -m "kurze Angabe der Änderungen"`
 
 ## lokales Repro mit entferntem Repro abgleichen
-Änderungen des entfernten Repros ins lokale Repro übernehmen    
+Änderungen des entfernten Repros ins lokale Repro übernehmen  
 `git fetch [alias]`  z.B. `git fetch orign`  
-Änderungen in lokalen Branch zusammenführen  
+Änderungen in lokalen Branch zusammenführen  
 `git merge [alias] [branch]`  
-lokale Änderungen des Repros ins entfernte Repro übernehmen    
+
+lokale Änderungen des Repros ins entfernte Repro übernehmen  
 `git push [alias][branch]`  z.B. `git push orign master`
 
 
