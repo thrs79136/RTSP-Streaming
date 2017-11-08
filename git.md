@@ -22,9 +22,7 @@ Aktualisierung des eigenen entfernten Repositories
 
 ## Dateien für die Versionierung auswählen
 Dateien im Arbeitsverzeichnis mit lokalem Repr. verknüpfen  
-`git add [file]`  
-nur Java-Dateien im Arbeitsverzeichnis mit lokalem Repr. verknüpfen  
-`git add *.java`
+`git add [file]`  z.B. `git add *.java`
 
 ## lokalen Commit erzeugen
 alle Änderungen an den versionierten Dateien ins lokale Repr. übergeben  
