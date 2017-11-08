@@ -13,8 +13,8 @@ Wechsel in das angelegte lokale Repository
 Umbenennen des Alias des originalen Repositories     
 `git remote rename origin htw-upstream`
 
-Anlegen der Verknüpfung (origin) mit dem eigenen entfernten Repository  
-`git remote add [alias] [url]`
+Anlegen der Verknüpfung (origin) mit dem eigenen entfernten Repository  
+`git remote add [alias] [url]`     
 `git remote add origin https://github.com/HTWDD-RN/sxxxxx-it2-beleg`
 
 Aktualisierung des eigenen entfernten Repositories  
@@ -22,15 +22,9 @@ Aktualisierung des eigenen entfernten Repositories
 
 ## Dateien für die Versionierung auswählen
 Dateien im Arbeitsverzeichnis mit lokalem Repr. verknüpfen  
-`git add [file]`
+`git add [file]`  
 nur Java-Dateien im Arbeitsverzeichnis mit lokalem Repr. verknüpfen  
 `git add *.java`
-
-## Dateihandling
-Es ist günstiger das Dateihandling mittels Git-Befehlen vorzunehmen, dann werden Änderungen im Dateisystem gleich erkannt.
-* Datei löschen `git rm [file]`
-* Datei nur im Index löschen `git rm --cached [file]`
-* Datei verschieben `git mv [file-orig] [file-renamed]`
 
 ## lokalen Commit erzeugen
 alle Änderungen an den versionierten Dateien ins lokale Repr. übergeben  
@@ -38,8 +32,9 @@ alle Änderungen an den versionierten Dateien ins lokale Repr. übergeben
 
 ## lokales Repro mit entferntem Repro abgleichen
 Änderungen des entfernten Repros ins lokale Repro übernehmen    
-`git fetch [alias]`  z.B. `git fetch orign` 
-Änderungen in lokalen Branch zusammenführen  `git merge [alias] [branch]`  
+`git fetch [alias]`  z.B. `git fetch orign`  
+Änderungen in lokalen Branch zusammenführen  
+`git merge [alias] [branch]`  
 lokale Änderungen des Repros ins entfernte Repro übernehmen    
 `git push [alias][branch]`  z.B. `git push orign master`
 
@@ -52,6 +47,12 @@ lokale Änderungen des Repros ins entfernte Repro übernehmen
 * Anzeige der Versionshistorie des aktuellen Branches `git log`
 * Anzeige der Versionshistorie einer Datei `git log --follow [file]`
 * Anzeige der Metadaten eines Commits `git show [commit]`
+
+## Dateihandling
+Es ist günstiger das Dateihandling mittels Git-Befehlen vorzunehmen, dann werden Änderungen im Dateisystem gleich erkannt.
+* Datei löschen `git rm [file]`
+* Datei nur im Index löschen `git rm --cached [file]`
+* Datei verschieben `git mv [file-orig] [file-renamed]`
 
 ## Branches
 Für neue Features einer Software eignen sich am Besten ein neuer Branch.
