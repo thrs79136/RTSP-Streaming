@@ -16,7 +16,16 @@ Ergänzen Sie die RTSP-Methoden OPTIONS und DESCRIBE anhand der Beispiele aus RF
 Simulieren Sie Paketverluste und eine variable Verzögerung im Netz, indem Sie am Sender eine wahlweise Unterdrückung von zu sendenden Paketen vornehmen. Diese Unterdrückung von Paketen sollte zufällig und mit einstellbarer Paketverlustwahrscheinlichkeit über das GUI erfolgen. Beispiel: der Wert 0,1 bedeutet, es werden im Mittel 10% der zu übertragenen Pakete unterdrückt.
 
 ### 5. Anzeige von Statistiken am Client
-t.b.d.
+Um die simulierten Netzwerkeigenschaften prüfen zu können und die Leistungsfähigkeit der später zu integrierenden Fehlerschutzcodes einschätzen zu können, ist eine Statistikanzeige notwendig.
+Folgende Werte sollten mindestens am Client angezeigt werden:
+1 Anzahl erhaltener/verlorener Medienpakete + prozentuale Angabe
+2 Anzahl korrigierter/unkorrigierbarer Medienpakete
+3 Die Anzeige sollte bis zum Ende des Videos sekündlich aktualisiert werden und dann auf dem Gesamtstand stehen bleiben.
+
+
+Mit dem ersten Punkt kann die Qualität der Verbindung eingeschätzt werden und mit dem zweiten Punkt die Leistungsfähigkeit des FEC-Verfahrens.
+Machen Sie sich Gedanken über weitere zu überwachende Parameter.
+
 
 ### 6. Implementierung des FEC-Schutzes
 t.b.d.
