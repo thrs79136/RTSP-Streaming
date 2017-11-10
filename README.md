@@ -1,6 +1,8 @@
 # RTSP-Streaming
 Beleg Videostreaming für das Modul Internettechnologien 2
 
+Hinweise zur Anlegung des eignen Repositories und zu Git finden Sie [hier](git.md).
+
 ## Aufgaben
 
 ### 1. Client
