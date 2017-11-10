@@ -90,5 +90,8 @@ Manchmal ist es sinnvoll, eventuelle Verzweigungen grafisch darzustellen. Hierf√
 
 * Git-√úbersicht (https://jan-krueger.net/wordpress/wp-content/uploads/2007/09/git-cheat-sheet.pdf)
 * Das Git-Buch (kostenlos)  (http://gitbu.ch/)
+* Cheat Sheet
 
-Cheat Sheet
+![GitHub-Workflow](/images/git.png)
+<!---  <img src="images/git.png" width="100">   --->
+
