@@ -29,7 +29,30 @@ Machen Sie sich Gedanken über weitere zu überwachende Parameter.
 
 
 ### 6. Implementierung des FEC-Schutzes
+Implementieren Sie einen FEC-Schutz mittels Parity-Check-Code (XOR mit k = 2...20, p = 1). Der Parameter sollte am Server einstellbar sein (GUI / Kommandozeile) Der Server mit FEC-Schutz soll kompatibel zu Clients ohne FEC-Verfahren sein! Nutzen Sie dazu das Feld Payloadtype des RTP-Headers (PT=127 für FEC-Pakete).
+Sie können sich bei der Implementierung an RFC 5109 orientieren, dies ist aber keine Pflicht. Sie sollten aber das Dokument zumindest lesen.
+
+Implementierung Sie FEC über nachfolgende Schritte:
+1. Nutzung einer separaten Klasse FECpacket für das FEC-Handling für Sender und Empfänger, siehe Ausführungen weiter unten
+2. Serverseitige Implementierung des XOR-FEC. Nach Auswertung des PT (26) sollte der Client nach wir vor regulär funktionieren.
+3. Entwurf der Architektur der Paket- und Bildverarbeitung im Client
+4. Eingangspuffer im Client implementieren (Größe ca. 1-2 s)
+5. FEC-Korrektur im Client implementieren
+
+Ändern Sie die vorhandenen Klassen nur soweit **nötig**. Halten Sie die Struktur einfach und überschaubar. Nutzen Sie Threads nur wenn dies notwendig ist und Sie die Nebenwirkungen (Blockierungen, Race-Condition) kennen. Bei einer durchdachten Implementierung benötigen Sie keine Threads.
+
+
+#### Architekturvorschlag
 t.b.d.
+
+#### Parameterwahl
+Finden Sie den optimalen Wert für k bei einer Kanalverlustrate von 10%. Optimal bedeutet in
+diesem Fall eine subjektiv zufriedenstellende Bildqualität bei geringstmöglicher Redundanz.
+
+#### Dokumentation
+Dokumentieren Sie Ihr Projekt. Beschreiben Sie die Architektur Ihrer Implementierung anhand
+sinnvoller Softwarebeschreibungsmethoden (Klassendiagramm, Zustandsdiagramm, etc.). Eine
+Quellcodekommentierung ist dazu nicht ausreichend!
 
 
 ## Literatur
