@@ -3,21 +3,23 @@
 ## eigenes Repository erstellen
 Erzeugen Sie einen eigenen GitHub-Account falls Sie noch keinen haben. Senden Sie das Nutzerkennzeichen per E-Mail an den Modulverantwortlichen oder informieren Sie diesen im Praktikum. Nach dem Erhalt der Bestätigungs-E-Mail sind Sie Mitglied von HTW-RN. Falls Sie die E-Eail nicht erhalten, können Sie alternativ die Mitgliedschaft auf http://github.com/HTWDD-RN bestätigen.
 
-Erzeugen Sie auf HTWDD-RN ein eigenes **privates** Repository mit einem Namen entsprechend Ihrer S-Nummer in der Form `sXXXX-it2-beleg`. Fügen Sie als Kommentar Ihren **Namen** hinzu, um die Zuordnung zu erleichtern.
+Erzeugen Sie auf HTWDD-RN ein eigenes **privates** Repository mit einem Namen entsprechend Ihrer S-Nummer und des Modulkürzels (`yyy=[rn|it1|it2|sn|vs]`) in der Form `sXXXX-yyy-beleg` . Fügen Sie als Kommentar Ihren **Namen** hinzu, um die Zuordnung zu erleichtern.
+
+Den Name des zu klonenden Repositories finden Sie auf der Vorlesungswebsite.
 
 ## eigenes Repository verknüpfen
 Repository lokal klonen  
-`git clone https://github.com/HTWDD-RN/RTSP-Streaming`
+`git clone https://github.com/HTWDD-RN/"Name des Repositories"`
 
 Wechsel in das angelegte lokale Repository  
-`cd RTSP-Streaming`
+`cd "Name des Repositories"`
 
 Umbenennen des Alias des originalen Repositories     
 `git remote rename origin htw-upstream`
 
 Anlegen der Verknüpfung (origin) mit dem eigenen entfernten Repository  
 `git remote add [alias] [url]`     
-`git remote add origin https://github.com/HTWDD-RN/sxxxxx-it2-beleg`
+`git remote add origin https://github.com/HTWDD-RN/sxxxxx-yyy-beleg`
 
 Aktualisierung des eigenen entfernten Repositories  
 `git push origin master`
