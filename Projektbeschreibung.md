@@ -47,8 +47,38 @@ Im Praktikum wird ein sehreinfacher Parserim Server verwendet, welcher die Daten
 ```
 C: OPTIONS movie.Mjpeg RTSP/1.0: 
    CSeq: 1
+
 S: RTSP/1.0 200 OK
- : CSeq: 1: Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSEC: SETUP movie.Mjpeg RTSP/1.0: CSeq: 1: Transport: RTP/UDP; client_port= 25000S: RTSP/1.0 200 OK: CSeq: 1: Session: 123456C: PLAY movie.Mjpeg RTSP/1.0: CSeq: 2: Session: 123456S: RTSP/1.0 200 OK: CSeq: 2: Session: 123456
+ : CSeq: 1
+ : Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE
+
+C: SETUP movie.Mjpeg RTSP/1.0
+ : CSeq: 1
+ : Transport: RTP/UDP; client_port= 25000
+
+S: RTSP/1.0 200 OK
+ : CSeq: 1
+ : Session: 123456
+
+C: PLAY movie.Mjpeg RTSP/1.0
+ : CSeq: 2
+ : Session: 123456
+
+S: RTSP/1.0 200 OK
+ : CSeq: 2
+ : Session: 123456
+
+C: PAUSE movie.Mjpeg RTSP/1.0
+ : CSeq: 3
+ : Session: 123456
+
+S: RTSP/1.0 200 OK
+ : CSeq: 3
+ : Session: 123456
+
+C: TEARDOWN movie.Mjpeg RTSP/1.0
+ : CSeq: 4
+ : Session: 123456
 ```
 
 ### Zustände des Clients
