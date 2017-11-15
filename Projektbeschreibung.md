@@ -84,12 +84,12 @@ C: TEARDOWN movie.Mjpeg RTSP/1.0
 ### Zustände des Clients
 Im RTSP-Protokoll hat jede Session einen bestimmten Zustand. Sie müssen den Zustand des Clients entsprechend aktualisieren.
 
-(images/rtp-state.gif)
+![RTP-Zustände](images/rtp-state.gif)
 
 ## 4. Server
 Auf Serverseite muss das Einbetten der Videodaten in die RTP-Pakete erfolgen. Die beinhaltet das Erzeugen des Paketes, Setzen der Headerfelder und setzen der Payload. Für Informationen zur Bitmanipulation in Java siehe **Vorlesungsfolien zu RTP**.
 
-(images/rtp-header.png)
+![RTP-Header](images/rtp-header.png)
 
 ## 5. Literatur
 
