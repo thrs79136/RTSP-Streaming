@@ -1,0 +1,17 @@
+# Projektrahmen
+Im Praktikum werden Sie einen Client und Server für Videostreaming unter Nutzung des Real-Time-Streaming-Protokolls (RTSP) implementieren. Die eigentlichen Videodaten werden mit-tels Real-Time-Protokoll (RTP) übertragen. Ein großer Teil der Funktionalität ist bereits alsQuelltext vorhanden, so das RTSP-Protokoll im Server, das RTP-Handling im Client sowie dieVideoanzeige.
+Ihre Aufgabe besteht im Wesentlichen aus der Ergänzung der Quellcodes in den Punkten:
+* RTSP-Protokoll im Client 
+* RTP-Protokoll im Server
+* FEC in Client und Server
+
+## Java-Klassen
+Das Projekt besteht aus folgenden Java-Klassen:
+
+Client: Funktionalität des Clients mit Benutzerschnittstelle zum Senden der RTSP-Kommandosund Anzeige des Videos.  
+Server: Funktionalität des Servers zur Antwort auf die RTSP-Clientanfragen und Streaming desVideos.  
+RTPpacket: Funktionalität zur Unterstützung von RTP-Paketen.  
+VideoStream: Funktionalität zum Einlesen einer MJPEG-Datei auf der Serverseite
+
+## Programmstart
+Der Start des Servers erfolgt mittels `java Server RTSP-Port`. Der Standard-RTSP-Port ist 554, Sie werden aber im Praktikum einen Port > 1024 nutzen. Der Start des Clients erfolgt mittels `java Client server_name server_port video_file`. Am Client können RTSP-Kommandos angefordert werden. Eine Kommunikation läuft in derRegel folgendermaßen ab:1.Client sendet SETUP: Erzeugung der Session und der Transportparameter2.Client sendet PLAY3.Client sendet u.U. PAUSE4.Client sendet TEARDOWN: Terminierung der Session.Der Server antwortet auf alle Clientrequests. Die Antwortcodes sind ähnlich zu HTTP. DerCode 200 bedeutet z.B. Erfolg. Die Codes finden Sie in [3]
