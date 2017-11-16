@@ -31,7 +31,7 @@ Implementieren Sie einen FEC-Schutz mittels Parity-Check-Code (XOR mit k = 2...2
 Sie können sich bei der Implementierung an RFC 5109 orientieren, dies ist aber keine Pflicht. Sie sollten aber das Dokument zumindest lesen.
 
 Implementierung Sie FEC über nachfolgende Schritte:
-1. Nutzung einer separaten Klasse FECpacket für das FEC-Handling für Sender und Empfänger, siehe Ausführungen weiter unten
+1. Nutzung einer separaten Klasse FECpacket für das FEC-Handling für Sender und Empfänger, siehe [Architekur](#Architekturvorschlag)
 2. Serverseitige Implementierung des XOR-FEC. Nach Auswertung des PT (26) sollte der Client nach wir vor regulär funktionieren.
 3. Entwurf der Architektur der Paket- und Bildverarbeitung im Client
 4. Eingangspuffer im Client implementieren (Größe ca. 1-2 s)
@@ -41,7 +41,23 @@ Implementierung Sie FEC über nachfolgende Schritte:
 
 
 #### Architekturvorschlag
-t.b.d.
+
+##### Server
+* der Server kann die gesamte Verarbeitung im vorhandenen Timer-Handler vornehmen
+* Nutzdaten speichern: `FECpacket.setdata()`
+* Nutzdaten senden
+* nach Ablauf des Gruppenzählers berechnetes FEC-Paket entgegennehmen und senden: `FECpacket.getdata()`
+* Kanalemulator jeweils für Medien- und FEC-Pakete aufrufen
+
+##### Client
+* Der Client könnte z.B. mit der doppelten Timerrate laufen und dann alle Verarbeitung im Timer-Handler vornehmen (keine Threads).
+• Pakete empfangen und speichern:  `FECpacket.rcvdata() bzw. FECpacket.rcvfec()`
+• Statistiken aktualisieren
+• zur richtigen Zeit (Timeraufruf) das nächste Bild anzeigen: `FECpacket.getjpeg()`
+* Verzögerung des Starts (ca. 1-2s), um den Puffer zu füllen
+
+In dem Klassenrumpf [FECpacket](FECpacket.java) finden Sie weitere Informationen.
+
 
 #### Parameterwahl
 Finden Sie den optimalen Wert für k bei einer Kanalverlustrate von 10%. Optimal bedeutet in
