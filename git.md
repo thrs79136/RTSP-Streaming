@@ -24,6 +24,18 @@ Anlegen der Verknüpfung (origin) mit dem eigenen entfernten Repository
 Aktualisierung des eigenen entfernten Repositories  
 `git push origin master`
 
+
+## eigene Arbeiten
+Oft ist es sinnvoll, nicht im master-Branch zu arbeiten, sondern in einem eigenen Branch.
+Dadurch kann der master-Branch immer mit dem upstream-Repository synchron gehalten werden.
+
+Erzeuge neuen Branch und wechsle in diesen  
+`git checkout -b [Name des neuen Branches]`  
+Aktualisierung des eigenen entfernten Repositories  
+`git push origin [Name des Branches]`  
+Aktualisierung des master-Branches vom upstream-Repository  
+`git fetch htw-upstream`
+
 ## Dateien für die Versionierung auswählen
 Dateien im Arbeitsverzeichnis mit lokalem Repr. verknüpfen  
 `git add [file]`  z.B. `git add *.java`
