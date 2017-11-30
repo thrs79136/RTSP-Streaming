@@ -10,7 +10,7 @@ Ergänzen Sie die Klasse Client entsprechend der in der Projektbeschreibung und 
 Ergänzen Sie die Klasse RTPpacket entsprechend der in der Projektbeschreibung und den Kommentaren im Quelltext gegebenen Hinweisen.
 
 ### 3. RTSP-Methoden
-Ergänzen Sie die RTSP-Methoden OPTIONS und DESCRIBE anhand der Beispiele aus [RFC 2326](https://www.ietf.org/rfc/rfc2326.txt), [RFC 2327](https://www.ietf.org/rfc/rfc2327.txt) und [RFC 5109](https://www.ietf.org/rfc/rfc5109.txt). Es ist ausreichend, sich bei DESCRIBE auf das Beispielvideo zu beziehen.
+Ergänzen Sie die RTSP-Methoden OPTIONS und DESCRIBE anhand der Beispiele aus [RFC 2326](https://www.ietf.org/rfc/rfc2326.txt) und [RFC 2327](https://www.ietf.org/rfc/rfc2327.txt). Es ist ausreichend, sich bei DESCRIBE auf das Beispielvideo zu beziehen.
 
 ### 4. Simulation von Paketverlusten
 Simulieren Sie Paketverluste und eine variable Verzögerung im Netz, indem Sie am Sender eine wahlweise Unterdrückung von zu sendenden Paketen vornehmen. Diese Unterdrückung von Paketen sollte zufällig und mit einstellbarer Paketverlustwahrscheinlichkeit über das GUI erfolgen. Beispiel: der Wert 0,1 bedeutet, es werden im Mittel 10% der zu übertragenen Pakete unterdrückt.
@@ -28,7 +28,7 @@ Machen Sie sich Gedanken über weitere zu überwachende Parameter.
 
 ### 6. Implementierung des FEC-Schutzes
 Implementieren Sie einen FEC-Schutz mittels Parity-Check-Code (XOR mit k = 2...20, p = 1). Der Parameter sollte am Server einstellbar sein (GUI / Kommandozeile) Der Server mit FEC-Schutz soll kompatibel zu Clients ohne FEC-Verfahren sein! Nutzen Sie dazu das Feld Payloadtype des RTP-Headers (PT=127 für FEC-Pakete).
-Sie können sich bei der Implementierung an RFC 5109 orientieren, dies ist aber keine Pflicht. Sie sollten aber das Dokument zumindest lesen.
+Sie können sich bei der Implementierung an [RFC 5109](https://www.ietf.org/rfc/rfc5109.txt) orientieren, dies ist aber keine Pflicht. Sie sollten aber das Dokument zumindest lesen.
 
 Implementierung Sie FEC über nachfolgende Schritte:
 1. Nutzung einer separaten Klasse FECpacket für das FEC-Handling für Sender und Empfänger, siehe [Architekur](#architekturvorschlag)
