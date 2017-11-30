@@ -1,5 +1,5 @@
 # Projektrahmen
-Im Praktikum werden Sie einen Client und Server für Videostreaming unter Nutzung des Real-Time-Streaming-Protokolls (RTSP) implementieren. Die eigentlichen Videodaten werden mittels Real-Time-Protokoll (RTP) übertragen. Ein großer Teil der Funktionalität ist bereits als Quelltext vorhanden, so das RTSP-Protokoll im Server, das RTP-Handling im Client sowie die Videoanzeige.
+Im Praktikum werden Sie einen Client und Server für Videostreaming unter Nutzung des Real-Time-Streaming-Protokolls [RTSP](http://www.ietf.org/rfc/rfc2326.txt) implementieren. Die eigentlichen Videodaten werden mittels Real-Time-Protokoll [RTP](http://www.ietf.org/rfc/rfc3550.txt) übertragen. Ein großer Teil der Funktionalität ist bereits als Quelltext vorhanden, so das RTSP-Protokoll im Server, das RTP-Handling im Client sowie die Videoanzeige.
 Ihre Aufgabe besteht im Wesentlichen aus der Ergänzung der Quellcodes in den Punkten:
 * RTSP-Protokoll im Client 
 * RTP-Protokoll im Server
@@ -8,10 +8,11 @@ Ihre Aufgabe besteht im Wesentlichen aus der Ergänzung der Quellcodes in den Pu
 ## 1. Java-Klassen
 Das Projekt besteht aus folgenden Java-Klassen:
 
-Client: Funktionalität des Clients mit Benutzerschnittstelle zum Senden der RTSP-Kommandosund Anzeige des Videos  
-Server: Funktionalität des Servers zur Antwort auf die RTSP-Clientanfragen und Streaming des Videos  
-RTPpacket: Funktionalität zur Unterstützung von RTP-Paketen  
-VideoStream: Funktionalität zum Einlesen einer MJPEG-Datei auf der Serverseite
+[Client](Client.java): Funktionalität des Clients mit Benutzerschnittstelle zum Senden der RTSP-Kommandosund Anzeige des Videos  
+[Server](Server.java): Funktionalität des Servers zur Antwort auf die RTSP-Clientanfragen und Streaming des Videos  
+[RTPpacket](RTPpacket.java): Funktionalität zur Unterstützung von RTP-Paketen  
+[FECpacket](FECpacket.java): Funktionalität zur Unterstützung von der Fehlerkorektur mittels FEC  
+[VideoStream](VideoStream.java): Funktionalität zum Einlesen einer MJPEG-Datei auf der Serverseite
 
 ## 2. Programmstart
 Der Start des Servers erfolgt mittels `java Server RTSP-Port`. Der Standard-RTSP-Port ist 554, Sie werden aber im Praktikum einen Port > 1024 nutzen. Der Start des Clients erfolgt mittels `java Client server_name server_port video_file`. Am Client können RTSP-Kommandos angefordert werden. 
@@ -20,7 +21,7 @@ Eine Kommunikation läuft in der Regel folgendermaßen ab:
 2. Client sendet PLAY 
 3. Client sendet u.U. PAUSE
 4. Client sendet TEARDOWN: Terminierung der Session.
-Der Server antwortet auf alle Clientrequests. Die Antwortcodes sind ähnlich zu HTTP. DerCode 200 bedeutet z.B. Erfolg. Die Codes finden Sie in [RTSP][2].
+Der Server antwortet auf alle Clientrequests. Die Antwortcodes sind ähnlich zu HTTP. DerCode 200 bedeutet z.B. Erfolg. Die Codes finden Sie in [RTSP](http://www.ietf.org/rfc/rfc2326.txt).
 
 ## 3. Client
 Als ersten Schritt sollte das RTSP-Protokoll in den Handlern der Buttons der Benutzerinterfaces vervollständigt werden. Für die RTSP-Kommunikation mit dem Server wird der bereits geöffnete Socket verwendet. In jeden Request muss ein CSeq-Header eingefügt werden. Der Wert von CSeq erhöht sich bei jedem Senderequest.
