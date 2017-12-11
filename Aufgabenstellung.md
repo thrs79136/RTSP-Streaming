@@ -27,7 +27,9 @@ Machen Sie sich Gedanken über weitere zu überwachende Parameter.
 
 
 ### 6. Implementierung des FEC-Schutzes
-Implementieren Sie einen FEC-Schutz mittels Parity-Check-Code (XOR mit k = 2...20, p = 1). Der Parameter sollte am Server einstellbar sein (GUI / Kommandozeile) Der Server mit FEC-Schutz soll kompatibel zu Clients ohne FEC-Verfahren sein! Nutzen Sie dazu das Feld Payloadtype des RTP-Headers (PT=127 für FEC-Pakete).
+Implementieren Sie einen FEC-Schutz mittels Parity-Check-Code (XOR mit k = 2...20, p = 1). Der Parameter sollte am Server einstellbar sein (GUI / Kommandozeile). Um die Gruppengröße dem Client mitzuteilen gibt es mehrere Möglichkeiten. Der Parameter könnte explizit in einem FEC-Header mitgeteilt werden oder der Client trackt den Wert anhand der Abfolge der Pakete.
+
+Der Server mit FEC-Schutz soll kompatibel zu Clients ohne FEC-Verfahren sein! Nutzen Sie dazu das Feld Payloadtype des RTP-Headers (PT=127 für FEC-Pakete).
 Sie können sich bei der Implementierung an [RFC 5109](https://www.ietf.org/rfc/rfc5109.txt) orientieren, dies ist aber keine Pflicht. Sie sollten aber das Dokument zumindest lesen.
 
 Implementierung Sie FEC über nachfolgende Schritte:
@@ -60,13 +62,13 @@ In dem Klassenrumpf [FECpacket](FECpacket.java) finden Sie weitere Informationen
 
 
 #### Parameterwahl
-Finden Sie den optimalen Wert für k bei einer Kanalverlustrate von 10%. Optimal bedeutet in
-diesem Fall eine subjektiv zufriedenstellende Bildqualität bei geringstmöglicher Redundanz.
+Finden Sie den optimalen Wert für k bei einer Kanalverlustrate von 10%. Optimal bedeutet in diesem Fall eine subjektiv zufriedenstellende Bildqualität bei geringstmöglicher Redundanz.
 
 #### Dokumentation
-Dokumentieren Sie Ihr Projekt. Beschreiben Sie die Architektur Ihrer Implementierung anhand
-sinnvoller Softwarebeschreibungsmethoden (Klassendiagramm, Zustandsdiagramm, etc.). Eine
-Quellcodekommentierung ist dazu nicht ausreichend!
+Dokumentieren Sie Ihr Projekt. Beschreiben Sie die Architektur Ihrer Implementierung anhand sinnvoller Softwarebeschreibungsmethoden (Klassendiagramm, Zustandsdiagramm, etc.). Eine Quellcodekommentierung ist dazu nicht ausreichend!
+
+## Optional
+Binden Sie ein eigenes Video ein. Dazu ist entweder das Video entsprechend der Struktur der Klasse VideoStream anzupassen oder die Klasse [VideoStream](VideoStream.java) ist für das einfache Einlesen (erkennen von SOI und EOI-Markern) von JPEGs anzupassen.
 
 
 ## Literatur
@@ -77,3 +79,5 @@ Quellcodekommentierung ist dazu nicht ausreichend!
 * RTP Profile for Audio and Video Conferences with Minimal Control  [RFC 3551](http://www.ietf.org/rfc/rfc3551.txt)
 * RTP Payload Format for Generic Forward Error Correction  [RFC 5109](http://www.ietf.org/rfc/rfc5109.txt)
 * Reed-Solomon Forward Error Correction (FEC) Schemes   [RFC 5510](http://www.ietf.org/rfc/rfc5510.txt)
+* JPEG-Format [Link](https://de.wikipedia.org/wiki/JPEG_File_Interchange_Format)
+* Diplomarbeit Karsten Pohl "Demonstration des RTSP-Videostreamings mittels VLC-Player und einer eigenen Implementierung"  [pdf](https://www2.htw-dresden.de/~jvogt/abschlussarbeiten/Pohl-Diplomarbeit.pdf)
