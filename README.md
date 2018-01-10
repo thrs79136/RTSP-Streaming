@@ -5,5 +5,6 @@ Folgende Dokumente beschreiben den Beleg:
 
 * [Projektbeschreibung](Projektbeschreibung.md)
 * [Aufgabenstellung](Aufgabenstellung.md)
+* [Abgabeformat](Abgabeformat.md)
 * [Git/GitHub-Nutzung](git.md)
 
