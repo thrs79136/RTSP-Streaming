@@ -11,7 +11,7 @@ Das Projekt besteht aus folgenden Java-Klassen:
 [Client](Client.java): Funktionalität des Clients mit Benutzerschnittstelle zum Senden der RTSP-Kommandosund Anzeige des Videos  
 [Server](Server.java): Funktionalität des Servers zur Antwort auf die RTSP-Clientanfragen und Streaming des Videos  
 [RTPpacket](RTPpacket.java): Funktionalität zur Unterstützung von RTP-Paketen  
-[FECpacket](FECpacket.java): Funktionalität zur Unterstützung von der Fehlerkorektur mittels FEC  
+[FECpacket](FECpacket.java): Funktionalität zur Unterstützung der Fehlerkorrektur mittels FEC  
 [VideoStream](VideoStream.java): Funktionalität zum Einlesen einer MJPEG-Datei auf der Serverseite
 
 ## 2. Programmstart
