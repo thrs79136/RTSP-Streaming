@@ -1,7 +1,7 @@
 # Schritte zum eigenen Repository
 
 ## eigenes Repository erstellen
-Erzeugen Sie einen eigenen GitHub-Account falls Sie noch keinen haben. Senden Sie das Nutzerkennzeichen per E-Mail an den Modulverantwortlichen oder informieren Sie diesen im Praktikum. Nach dem Erhalt der Bestätigungs-E-Mail sind Sie Mitglied von HTW-RN. Falls Sie die E-Eail nicht erhalten, können Sie alternativ die Mitgliedschaft auf http://github.com/HTWDD-RN bestätigen.
+Erzeugen Sie einen eigenen GitHub-Account falls Sie noch keinen haben. Senden Sie das Nutzerkennzeichen per E-Mail an den Modulverantwortlichen oder informieren Sie diesen im Praktikum. Nach dem Erhalt der Bestätigungs-E-Mail sind Sie Mitglied der GitHub-Organisation HTWDD-RN. Falls Sie die E-Email nicht erhalten, können Sie alternativ die Mitgliedschaft auf http://github.com/HTWDD-RN bestätigen.
 
 Erzeugen Sie auf HTWDD-RN ein eigenes **privates** Repository mit einem Namen entsprechend Ihrer S-Nummer und des Modulkürzels (`yyy=[rn|it1|it2|sn|vs]`) in der Form `sXXXX-yyy-beleg` . Fügen Sie als Kommentar Ihren **Namen** hinzu, um die Zuordnung zu erleichtern. Dies können Sie auch nachträglich auf der Website des betreffenden Repositories tuen, wenn Sie beim Code-Tab den Edit-Button benutzen.
 
