@@ -21,10 +21,10 @@ Eine Kommunikation läuft in der Regel folgendermaßen ab:
 2. Client sendet PLAY 
 3. Client sendet u.U. PAUSE
 4. Client sendet TEARDOWN: Terminierung der Session.
-Der Server antwortet auf alle Clientrequests. Die Antwortcodes sind ähnlich zu HTTP. DerCode 200 bedeutet z.B. Erfolg. Die Codes finden Sie in [RTSP](http://www.ietf.org/rfc/rfc2326.txt).
+Der Server antwortet auf alle Clientrequests. Die Antwortcodes sind ähnlich zu HTTP. Der Code 200 bedeutet z.B. Erfolg. Die RTSP-Antwortcodes finden Sie in [RTSP](http://www.ietf.org/rfc/rfc2326.txt).
 
 ## 3. Client
-Als ersten Schritt sollte das RTSP-Protokoll in den Handlern der Buttons der Benutzerinterfaces vervollständigt werden. Für die RTSP-Kommunikation mit dem Server wird der bereits geöffnete Socket verwendet. In jeden Request muss ein CSeq-Header eingefügt werden. Der Wert von CSeq erhöht sich bei jedem Senderequest.
+Als ersten Schritt sollte das RTSP-Protokoll in den Handlern der Buttons des Benutzerinterfaces vervollständigt werden. Für die RTSP-Kommunikation mit dem Server wird der bereits geöffnete Socket verwendet. In jeden Request muss ein CSeq-Header eingefügt werden. Der Wert von CSeq erhöht sich bei jedem Senderequest.
 
 ### Setup
 * Erzeugen eines Sockets für den Empfang der RTP-Pakete und setzen des Timeouts (5 ms)
@@ -44,7 +44,7 @@ Als ersten Schritt sollte das RTSP-Protokoll in den Handlern der Buttons der Ben
 * Einlesen der RTSP-Antwort
 
 ### Beispiel
-Im Praktikum wird ein sehr einfacher Parser im Server verwendet, welcher die Daten in einer bestimmten Reihenfolge erwartet. Bitte orientieren Sie sich an den folgenden Beispiel (C-Client,S-Server). Insbesondere sind die **Leerzeichen** zu beachten (`client_port`) und die Request-URLdarf nur relativ sein (ohne `rtsp://host`).
+Im Praktikum wird ein sehr einfacher Parser im Server verwendet, welcher die Daten in einer bestimmten Reihenfolge erwartet. Bitte orientieren Sie sich an dem folgenden Beispiel (C-Client,S-Server). Insbesondere sind die **Leerzeichen** zu beachten (`client_port`) und die Request-URLdarf nur relativ sein (ohne `rtsp://host`).
 ```
 C: OPTIONS movie.Mjpeg RTSP/1.0
  : CSeq: 1
