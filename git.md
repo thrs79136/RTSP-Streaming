@@ -33,11 +33,12 @@ Erzeuge neuen Branch `beleg`, verknüpfe diesen mit dem eigenen Repository und w
 `git checkout -b beleg  myrepro/beleg`  
 
 Testen lässt sich die korrekte Zuordnung mittels: `git remote -vv`
-`htw-upstream	https://nutzer@github.com/HTWDD-RN/RTSP-Streaming (fetch)`
-`htw-upstream	https://nutzer@github.com/HTWDD-RN/RTSP-Streaming (push)`
-`myrepro	    https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (fetch)`
-`myrepro	    https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (push)`
-
+```
+htw-upstream	https://nutzer@github.com/HTWDD-RN/RTSP-Streaming (fetch)
+htw-upstream	https://nutzer@github.com/HTWDD-RN/RTSP-Streaming (push)
+myrepro	      https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (fetch)
+myrepro	      https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (push)
+```
 Aktualisierung des eigenen entfernten Repositories  
 `git push myrepro [Name des Branches]`  
 Aktualisierung des master-Branches vom upstream-Repository  
