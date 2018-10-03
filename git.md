@@ -36,8 +36,8 @@ Testen lässt sich die korrekte Zuordnung mittels: `git remote -vv`
 ```
 htw-upstream	https://nutzer@github.com/HTWDD-RN/RTSP-Streaming (fetch)
 htw-upstream	https://nutzer@github.com/HTWDD-RN/RTSP-Streaming (push)
-myrepro	      https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (fetch)
-myrepro	      https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (push)
+myrepro	        https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (fetch)
+myrepro	        https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (push)
 ```
 Aktualisierung des eigenen entfernten Repositories  
 `git push myrepro [Name des Branches]`  
