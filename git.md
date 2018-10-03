@@ -17,22 +17,29 @@ Wechsel in das angelegte lokale Repository
 Umbenennen des Alias des originalen Repositories     
 `git remote rename origin htw-upstream`
 
-Anlegen der Verknüpfung (origin) mit dem eigenen entfernten Repository  
+Anlegen der Verknüpfung (myrepro) mit dem eigenen entfernten Repository  
 `git remote add [alias] [url]`     
-`git remote add origin https://github.com/HTWDD-RN/sxxxxx-yyy-beleg`
+`git remote add myrepro https://github.com/HTWDD-RN/sxxxxx-yyy-beleg`
 
 Aktualisierung des eigenen entfernten Repositories  
-`git push origin master`
+`git push myrepro master`
 
 
 ## eigene Arbeiten
 Oft ist es sinnvoll, nicht im master-Branch zu arbeiten, sondern in einem eigenen Branch.
 Dadurch kann der master-Branch immer mit dem upstream-Repository synchron gehalten werden.
 
-Erzeuge neuen Branch und wechsle in diesen  
-`git checkout -b [Name des neuen Branches]`  
+Erzeuge neuen Branch `beleg`, verknüpfe diesen mit dem eigenen Repository und wechsle in diesen  
+`git checkout -b beleg  myrepro/beleg`  
+
+Testen lässt sich die korrekte Zuordnung mittels: `git remote -vv`
+`htw-upstream	https://nutzer@github.com/HTWDD-RN/RTSP-Streaming (fetch)`
+`htw-upstream	https://nutzer@github.com/HTWDD-RN/RTSP-Streaming (push)`
+`myrepro	    https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (fetch)`
+`myrepro	    https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (push)`
+
 Aktualisierung des eigenen entfernten Repositories  
-`git push origin [Name des Branches]`  
+`git push myrepro [Name des Branches]`  
 Aktualisierung des master-Branches vom upstream-Repository  
 `git fetch htw-upstream`
 
@@ -46,12 +53,12 @@ alle Änderungen an den versionierten Dateien ins lokale Repr. übergeben
 
 ## lokales Repro mit entferntem Repro abgleichen
 Änderungen des entfernten Repros ins lokale Repro übernehmen  
-`git fetch [alias]`  z.B. `git fetch orign`  
+`git fetch [alias]`  z.B. `git fetch myrepro`  
 Änderungen in lokalen Branch zusammenführen  
 `git merge [alias] [branch]`  
 
 lokale Änderungen des Repros ins entfernte Repro übernehmen  
-`git push [alias][branch]`  z.B. `git push orign master`
+`git push [alias][branch]`  z.B. `git push myrepro beleg`
 
 
 ## Status
