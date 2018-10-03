@@ -29,7 +29,7 @@ Aktualisierung des eigenen entfernten Repositories
 Oft ist es sinnvoll, nicht im master-Branch zu arbeiten, sondern in einem eigenen Branch.
 Dadurch kann der master-Branch immer mit dem upstream-Repository synchron gehalten werden.
 
-Erzeuge neuen Branch `beleg`, verknüpfe diesen mit dem eigenen Repository und wechsle in diesen  
+Erzeuge neuen Branch `beleg`, verknüpfe diesen mit dem eigenen Repository und wechsle in diesen:
 `git checkout -b beleg  myrepro/beleg`  
 
 Testen lässt sich die korrekte Zuordnung mittels: `git remote -vv`
@@ -39,6 +39,13 @@ htw-upstream	https://nutzer@github.com/HTWDD-RN/RTSP-Streaming (push)
 myrepro	        https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (fetch)
 myrepro	        https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (push)
 ```
+
+Mittels `git branch -vv` wird die Zuordnung der lokalen Branches zu den Remote-Branches angezeigt (der Marker * zeigt den aktiven Branch an):
+```
+* beleg  8b1e446 [myrepro/beleg]
+  master 2eb7c88 [htw-upstream/master]
+```
+
 Aktualisierung des eigenen entfernten Repositories  
 `git push myrepro [Name des Branches]`  
 Aktualisierung des master-Branches vom upstream-Repository  
