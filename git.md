@@ -49,8 +49,7 @@ Mittels `git branch -vv` wird die Zuordnung der lokalen Branches zu den Remote-B
 Aktualisierung des eigenen entfernten Repositories  
 `git push myrepro beleg`  
 Aktualisierung des master-Branches vom upstream-Repository  
-`git fetch htw-upstream`
-
+`git fetch htw-upstream master:master`
 
 ## Grundlegende Schritte im lokalen und entfernten Repository
 
@@ -73,7 +72,7 @@ lokale Änderungen des Repros ins entfernte Repro übernehmen
 Falls aktualisierte Dateien im HTW-Repository bereitgestellt werden, können diese mit dem eigenen Repository zusammengeführt werden.
 
 Änderungen des Upstream-Repros ins lokale Repro übernehmen:  
-`git fetch htw-upstream` 
+`git fetch htw-upstream master:master` 
 
 Änderungen vom Upstream-Branch `master` im lokalen Branch `beleg` zusammenführen:
 `git merge htw-upstream/master`  
