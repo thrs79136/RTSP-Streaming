@@ -1,13 +1,13 @@
 # Schritte zum eigenen Repository
 
-## eigenes Repository erstellen
+## Eigenes Repository erstellen
 Erzeugen Sie einen eigenen GitHub-Account falls Sie noch keinen haben. Senden Sie das Nutzerkennzeichen per E-Mail an den Modulverantwortlichen oder informieren Sie diesen im Praktikum. Nach dem Erhalt der Bestätigungs-E-Mail sind Sie Mitglied der GitHub-Organisation HTWDD-RN. Falls Sie die E-Email nicht erhalten, können Sie alternativ die Mitgliedschaft auf http://github.com/HTWDD-RN bestätigen.
 
 Erzeugen Sie auf HTWDD-RN ein eigenes **privates** Repository mit einem Namen entsprechend Ihrer S-Nummer und des Modulkürzels (`yyy=[rn|it1|it2|sn|vs]`) in der Form `sXXXX-yyy-beleg` . Fügen Sie als Kommentar Ihren **Namen** hinzu, um die Zuordnung zu erleichtern. Dies können Sie auch nachträglich auf der Website des betreffenden Repositories tuen, wenn Sie beim Code-Tab den Edit-Button benutzen.
 
 Den Name des zu klonenden Repositories finden Sie auf der Vorlesungswebsite.
 
-## eigenes Repository verknüpfen
+## Eigenes Repository verknüpfen
 Repository lokal klonen  
 `git clone https://github.com/HTWDD-RN/"Name des Repositories"`
 
@@ -25,7 +25,7 @@ Aktualisierung des eigenen entfernten Repositories
 `git push myrepro master`
 
 
-## eigene Arbeiten
+## Arbeiten im eigenen Branch
 Oft ist es sinnvoll, nicht im master-Branch zu arbeiten, sondern in einem eigenen Branch.
 Dadurch kann der master-Branch immer mit dem upstream-Repository synchron gehalten werden.
 
@@ -47,29 +47,41 @@ Mittels `git branch -vv` wird die Zuordnung der lokalen Branches zu den Remote-B
 ```
 
 Aktualisierung des eigenen entfernten Repositories  
-`git push myrepro [Name des Branches]`  
+`git push myrepro beleg`  
 Aktualisierung des master-Branches vom upstream-Repository  
 `git fetch htw-upstream`
 
-## Dateien für die Versionierung auswählen
+
+## Grundlegende Schritte im lokalen und entfernten Repository
+
+### Dateien für die Versionierung auswählen
 Dateien im Arbeitsverzeichnis mit lokalem Repr. verknüpfen  
 `git add [file]`  z.B. `git add *.java`
 
-## lokalen Commit erzeugen
+### Lokalen Commit erzeugen
 alle Änderungen an den versionierten Dateien ins lokale Repr. übergeben  
 `git commit -a`  oder  `git commit -a -m "kurze Angabe der Änderungen"`
 
-## lokales Repro mit entferntem Repro abgleichen
+### Lokales Repro mit entferntem Repro abgleichen
 Änderungen des entfernten Repros ins lokale Repro übernehmen  
-`git fetch [alias]`  z.B. `git fetch myrepro`  
-Änderungen in lokalen Branch zusammenführen  
-`git merge [alias] [branch]`  
+`git pull myrepro`  
 
 lokale Änderungen des Repros ins entfernte Repro übernehmen  
-`git push [alias][branch]`  z.B. `git push myrepro beleg`
+`git push myrepro beleg`
+
+## Integrieren der Änderungen des Upstream-Repositories
+Falls aktualisierte Dateien im HTW-Repository bereitgestellt werden, können diese mit dem eigenen Repository zusammengeführt werden.
+
+Änderungen des Upstream-Repros ins lokale Repro übernehmen  
+`git fetch htw-upstream` 
+
+Änderungen von Branch `master` in lokalen Branch `beleg` zusammenführen:
+`git merge master`  
 
 
-## Status
+## Grundlegende Befehle
+
+### Status azeigen
 * Anzeige aller neuen oder geänderten Dateien `git status`
 * Anzeige der Änderungen `git diff`
 * Anzeige der verknüpften entfernten Repros  `git remote -v`
@@ -78,32 +90,33 @@ lokale Änderungen des Repros ins entfernte Repro übernehmen
 * Anzeige der Versionshistorie einer Datei `git log --follow [file]`
 * Anzeige der Metadaten eines Commits `git show [commit]`
 
-## Dateihandling
+### Dateihandling
 Es ist günstiger das Dateihandling mittels Git-Befehlen vorzunehmen, dann werden Änderungen im Dateisystem gleich erkannt.
 * Datei löschen `git rm [file]`
 * Datei nur im Index löschen `git rm --cached [file]`
 * Datei verschieben `git mv [file-orig] [file-renamed]`
 
-## Branches
+
+### Branches
 Für neue Features einer Software eignen sich am Besten ein neuer Branch.
 * Neuen Branch erstellen `git branch [branch-name]`
 * Branch auschecken `git checkout [branch-name]`
 * Branch mit aktuellen Branch zusammenführen `git merge [branch]`
 * Branch löschen `git branch -d [branch-name]`
 
-## Rücknahme von Änderungen
+### Rücknahme von Änderungen
 * Datei im Arbeitsbereich auf Zustand im Repro zurücketzen `git checkout -- [file]`
 * Rücknahme aller commits nach [commit] (Arbeitsbereich bleibt unverändert) `git reset [commit]`
 * Rücknahme aller Änderungen und Wechsel zu ang. Commit `git reset --hard [commit]`
 
-## Zwischenspeicher
+### Zwischenspeicher
 Manchmal will man schnell an einem anderen Branch arbeiten aber die geänderten Dateien noch nicht commiten.
 Dazu eignet sich der Zwischenspeicher.
 * Temoräre Speicherung `git stash`
 * Holen der letzen Speicherung `git stash pop`
 * Anzeigen des Speichers `git stash list`
 
-## Arbeitserleichterung
+### Arbeitserleichterung
 Die globale Konfigurationsdatei der ignorierten Dateien befindet sich in `~/.gitignore`.
 Hier können alle unerwünschten Dateiendungen wie z.B. `*.class *.*~ *.out *.log bin/  tmp*` aufgelistet werden.
 
@@ -112,10 +125,10 @@ Die globale Konfiguration befindet sich in ~/.gitconfig
 * Git-Usernamen  `git config --global url."https://yourusername@github.com".insteadOf "https://github.com"`
 * Git-Passwort cachen  `git config --global credential.helper 'cache –timeout=5400'`
 
-## GUI
+### GUI
 Manchmal ist es sinnvoll, eventuelle Verzweigungen grafisch darzustellen. Hierfür werden zwei Tools bereitgestellt: `gitk` und `smartgit`.
 
-## Hilfe
+### Hilfe
 `git help`  
 `git help befehl`
 
