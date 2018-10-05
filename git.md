@@ -29,7 +29,7 @@ Aktualisierung des eigenen entfernten Repositories
 Oft ist es sinnvoll, nicht im master-Branch zu arbeiten, sondern in einem eigenen Branch.
 Dadurch kann der master-Branch immer mit dem upstream-Repository synchron gehalten werden.
 
-Erzeuge neuen Branch `beleg`, verknüpfe diesen mit dem eigenen Repository und wechsle in diesen:
+Erzeuge neuen Branch `beleg`, verknüpfe diesen mit dem eigenen Repository und wechsle in diesen:  
 `git checkout -b beleg  myrepro/beleg`  
 
 Testen lässt sich die korrekte Zuordnung mittels: `git remote -vv`
@@ -72,12 +72,14 @@ lokale Änderungen des Repros ins entfernte Repro übernehmen
 ## Integrieren der Änderungen des Upstream-Repositories
 Falls aktualisierte Dateien im HTW-Repository bereitgestellt werden, können diese mit dem eigenen Repository zusammengeführt werden.
 
-Änderungen des Upstream-Repros ins lokale Repro übernehmen  
+Änderungen des Upstream-Repros ins lokale Repro übernehmen:  
 `git fetch htw-upstream` 
 
-Änderungen von Branch `master` in lokalen Branch `beleg` zusammenführen:
-`git merge master`  
+Änderungen vom Upstream-Branch `master` im lokalen Branch `beleg` zusammenführen:
+`git merge htw-upstream/master`  
 
+Unter Umständen ist das Auflösen eines Merge-Konfliktes notwendig.
+Mittels `git mergetool --tool=meld` können die gewünschten Änderungen komfortabel  ausgewählt werden.
 
 ## Grundlegende Befehle
 
