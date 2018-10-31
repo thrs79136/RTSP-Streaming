@@ -8,11 +8,11 @@ Ihre Aufgabe besteht im Wesentlichen aus der Ergänzung der Quellcodes in den Pu
 ## 1. Java-Klassen
 Das Projekt besteht aus folgenden Java-Klassen:
 
-[Client](Client.java): Funktionalität des Clients mit Benutzerschnittstelle zum Senden der RTSP-Kommandosund Anzeige des Videos  
-[Server](Server.java): Funktionalität des Servers zur Antwort auf die RTSP-Clientanfragen und Streaming des Videos  
-[RTPpacket](RTPpacket.java): Funktionalität zur Unterstützung von RTP-Paketen  
-[FECpacket](FECpacket.java): Funktionalität zur Unterstützung der Fehlerkorrektur mittels FEC  
-[VideoStream](VideoStream.java): Funktionalität zum Einlesen einer MJPEG-Datei auf der Serverseite
+[Client](src/Client.java): Funktionalität des Clients mit Benutzerschnittstelle zum Senden der RTSP-Kommandosund Anzeige des Videos  
+[Server](src/Server.java): Funktionalität des Servers zur Antwort auf die RTSP-Clientanfragen und Streaming des Videos  
+[RTPpacket](src/RTPpacket.java): Funktionalität zur Unterstützung von RTP-Paketen  
+[FECpacket](src/FECpacket.java): Funktionalität zur Unterstützung der Fehlerkorrektur mittels FEC  
+[VideoStream](src/VideoStream.java): Funktionalität zum Einlesen einer MJPEG-Datei auf der Serverseite
 
 ## 2. Programmstart
 Der Start des Servers erfolgt mittels `java Server RTSP-Port`. Der Standard-RTSP-Port ist 554, Sie werden aber im Praktikum einen Port > 1024 nutzen. Der Start des Clients erfolgt mittels `java Client server_name server_port video_file`. Am Client können RTSP-Kommandos angefordert werden. 

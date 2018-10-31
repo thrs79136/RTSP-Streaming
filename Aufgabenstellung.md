@@ -58,7 +58,7 @@ Implementierung Sie FEC über nachfolgende Schritte:
 • zur richtigen Zeit (Timeraufruf) das nächste Bild anzeigen: `FECpacket.getjpeg()`
 * Verzögerung des Starts (ca. 1-2s), um den Puffer zu füllen
 
-In dem Klassenrumpf [FECpacket](FECpacket.java) finden Sie weitere Informationen.
+In dem Klassenrumpf [FECpacket](src/FECpacket.java) finden Sie weitere Informationen.
 
 
 #### Parameterwahl
@@ -68,7 +68,7 @@ Finden Sie den optimalen Wert für k bei einer Kanalverlustrate von 10%. Optimal
 Dokumentieren Sie Ihr Projekt. Beschreiben Sie die Architektur Ihrer Implementierung anhand sinnvoller Softwarebeschreibungsmethoden (Klassendiagramm, Zustandsdiagramm, etc.). Eine Quellcodekommentierung ist dazu nicht ausreichend!
 
 ## Optional
-Binden Sie ein eigenes Video ein. Dazu ist entweder das Video entsprechend der Struktur der Klasse VideoStream anzupassen oder die Klasse [VideoStream](VideoStream.java) ist für das einfache Einlesen (erkennen von SOI und EOI-Markern) von JPEGs anzupassen.
+Binden Sie ein eigenes Video ein. Dazu ist entweder das Video entsprechend der Struktur der Klasse VideoStream anzupassen oder die Klasse [VideoStream](src/VideoStream.java) ist für das einfache Einlesen (erkennen von SOI und EOI-Markern) von JPEGs anzupassen.
 
 
 ## Literatur
