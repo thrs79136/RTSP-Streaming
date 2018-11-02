@@ -9,7 +9,7 @@ Den Name des zu klonenden Repositories finden Sie auf der Vorlesungswebsite.
 
 ## Eigenes Repository verknüpfen
 Repository lokal klonen  
-`git clone https://github.com/HTWDD-RN/"Name des Repositories"`
+`git clone https://github.com/HTWDD-RN/"Name des zu klonenden Repositories"`
 
 Wechsel in das angelegte lokale Repository  
 `cd "Name des Repositories"`
@@ -18,8 +18,8 @@ Umbenennen des Alias des originalen Repositories
 `git remote rename origin htw-upstream`
 
 Anlegen der Verknüpfung (myrepo) mit dem eigenen entfernten Repository  
-`git remote add [alias] [url]`     
-`git remote add myrepo https://github.com/HTWDD-RN/sxxxxx-yyy-beleg`
+Syntax: `git remote add [alias] [url]`     
+Beispiel: `git remote add myrepo https://github.com/HTWDD-RN/sxxxxx-yyy-beleg`
 
 Aktualisierung des eigenen entfernten Repositories  
 `git push myrepo master`
