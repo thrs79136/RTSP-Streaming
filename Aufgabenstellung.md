@@ -10,7 +10,9 @@ Ergänzen Sie die Klasse Client entsprechend der in der Projektbeschreibung und 
 Ergänzen Sie die Klasse RTPpacket entsprechend der in der Projektbeschreibung und den Kommentaren im Quelltext gegebenen Hinweisen.
 
 ### 3. RTSP-Methoden
-Ergänzen Sie die RTSP-Methoden OPTIONS und DESCRIBE anhand der Beispiele aus [RFC 2326](https://www.ietf.org/rfc/rfc2326.txt) und [RFC 2327](https://www.ietf.org/rfc/rfc2327.txt). Es ist ausreichend, sich bei DESCRIBE auf das Beispielvideo zu beziehen.
+Der RTSP-Parser im Client und Server ist sehr primitiv, insbesondere wird nicht auf eine Leerzeile als Abschluss eines Requests gewartet und auch keine gesendet. Beheben Sie dieses Problem, um die nachfolgenden Aufgaben sinnvoll bearbeiten zu können.
+
+Ergänzen Sie die RTSP-Methoden OPTIONS und DESCRIBE anhand der Beispiele aus [RFC 2326](https://www.ietf.org/rfc/rfc2326.txt) und [RFC 2327](https://www.ietf.org/rfc/rfc2327.txt). Es ist ausreichend, sich bei DESCRIBE auf das Beispielvideo zu beziehen. 
 
 ### 4. Simulation von Paketverlusten
 Simulieren Sie Paketverluste und eine variable Verzögerung im Netz, indem Sie am Sender eine wahlweise Unterdrückung von zu sendenden Paketen vornehmen. Diese Unterdrückung von Paketen sollte zufällig und mit einstellbarer Paketverlustwahrscheinlichkeit über das GUI erfolgen. Beispiel: der Wert 0,1 bedeutet, es werden im Mittel 10% der zu übertragenen Pakete unterdrückt.
@@ -33,7 +35,7 @@ Der Server mit FEC-Schutz soll kompatibel zu Clients ohne FEC-Verfahren sein! Nu
 Sie können sich bei der Implementierung an [RFC 5109](https://www.ietf.org/rfc/rfc5109.txt) orientieren, dies ist aber keine Pflicht. Sie sollten aber das Dokument zumindest lesen.
 
 Implementierung Sie FEC über nachfolgende Schritte:
-1. Nutzung einer separaten Klasse FECpacket für das FEC-Handling für Sender und Empfänger, siehe [Architekur](#architekturvorschlag)
+1. Nutzung einer separaten Klasse FECpacket für das FEC-Handling für Sender und Empfänger, siehe [Architektur](#architekturvorschlag)
 2. Serverseitige Implementierung des XOR-FEC. Nach Auswertung des PT (26) sollte der Client nach wir vor regulär funktionieren.
 3. Entwurf der Architektur der Paket- und Bildverarbeitung im Client
 4. Eingangspuffer im Client implementieren (Größe ca. 1-2 s)

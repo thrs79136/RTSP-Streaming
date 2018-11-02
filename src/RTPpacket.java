@@ -43,9 +43,7 @@ public class RTPpacket {
     // --------------------------
     header = new byte[HEADER_SIZE];
 
-    // .............
     // TODO TO COMPLETE
-    // .............
     // fill the header array of byte with RTP header fields
 
     // header[0] = ...
@@ -103,9 +101,7 @@ public class RTPpacket {
   // getpayload: return the payload bistream of the RTPpacket and its size
   // --------------------------
   public int getpayload(byte[] data) {
-
     for (int i = 0; i < payload_size; i++) data[i] = payload[i];
-
     return (payload_size);
   }
 

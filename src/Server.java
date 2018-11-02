@@ -269,6 +269,7 @@ public class Server extends JFrame implements ActionListener {
         RTP_dest_port = Integer.parseInt(tokens.nextToken());
       }
       // else LastLine will be the SessionId line ... do not check for now.
+      // TODO Read until end of request (empty line)
     } catch (Exception ex) {
       System.out.println("Exception caught: " + ex);
       System.exit(0);
@@ -284,6 +285,7 @@ public class Server extends JFrame implements ActionListener {
       RTSPBufferedWriter.write("RTSP/1.0 200 OK" + CRLF);
       RTSPBufferedWriter.write("CSeq: " + RTSPSeqNb + CRLF);
       RTSPBufferedWriter.write("Session: " + RTSP_ID + CRLF);
+      // TODO Send end of response
       RTSPBufferedWriter.flush();
       // System.out.println("RTSP Server - Sent response to Client.");
     } catch (Exception ex) {

@@ -140,9 +140,7 @@ public class Client {
   // Handler for buttons
   // ------------------------------------
 
-  // .............
   // TODO TO COMPLETE
-  // .............
 
   // Handler for Setup button
   // -----------------------
@@ -347,6 +345,8 @@ public class Client {
         tokens.nextToken(); // skip over the Session:
         RTSPid = Integer.parseInt(tokens.nextToken());
       }
+
+      // TODO parse for end of response corresponding to servers behavior
     } catch (Exception ex) {
       System.out.println("Exception caught: " + ex);
       System.exit(0);
@@ -359,9 +359,7 @@ public class Client {
   // Send RTSP Request
   // ------------------------------------
 
-  // .............
   // TODO TO COMPLETE
-  // .............
 
   private void send_RTSP_request(String request_type) {
     try {
@@ -378,6 +376,8 @@ public class Client {
       // if ....
       // otherwise, write the Session line from the RTSPid field
       // else ....
+
+      // send end of request corresponding to servers behavior
 
       RTSPBufferedWriter.flush();
     } catch (Exception ex) {
