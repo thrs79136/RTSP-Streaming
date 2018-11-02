@@ -17,37 +17,41 @@ Wechsel in das angelegte lokale Repository
 Umbenennen des Alias des originalen Repositories     
 `git remote rename origin htw-upstream`
 
-Anlegen der Verknüpfung (myrepro) mit dem eigenen entfernten Repository  
+Anlegen der Verknüpfung (myrepo) mit dem eigenen entfernten Repository  
 `git remote add [alias] [url]`     
-`git remote add myrepro https://github.com/HTWDD-RN/sxxxxx-yyy-beleg`
+`git remote add myrepo https://github.com/HTWDD-RN/sxxxxx-yyy-beleg`
 
 Aktualisierung des eigenen entfernten Repositories  
-`git push myrepro master`
+`git push myrepo master`
 
 
 ## Arbeiten im eigenen Branch
 Oft ist es sinnvoll, nicht im master-Branch zu arbeiten, sondern in einem eigenen Branch.
 Dadurch kann der master-Branch immer mit dem upstream-Repository synchron gehalten werden.
 
-Erzeuge neuen Branch `beleg`, verknüpfe diesen mit dem eigenen Repository und wechsle in diesen:  
-`git checkout -b beleg  myrepro/beleg`  
+Erzeuge neuen Branch `beleg` und wechsle in diesen:  
+`git checkout -b beleg`  
+lade diesen ins eigene Repo. als Branch `beleg` hoch:  
+`git push myrepo beleg`  
+verknüpfe lokalen Branch mit entferntem Branch (Remote-Tracking-Branch):  
+`git branch -u myrepo/beleg`
 
 Testen lässt sich die korrekte Zuordnung mittels: `git remote -vv`
 ```
 htw-upstream	https://nutzer@github.com/HTWDD-RN/RTSP-Streaming (fetch)
 htw-upstream	https://nutzer@github.com/HTWDD-RN/RTSP-Streaming (push)
-myrepro	        https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (fetch)
-myrepro	        https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (push)
+myrepo	        https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (fetch)
+myrepo	        https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (push)
 ```
 
 Mittels `git branch -vv` wird die Zuordnung der lokalen Branches zu den Remote-Branches angezeigt (der Marker * zeigt den aktiven Branch an):
 ```
-* beleg  8b1e446 [myrepro/beleg]
+* beleg  8b1e446 [myrepo/beleg]
   master 2eb7c88 [htw-upstream/master]
 ```
 
 Aktualisierung des eigenen entfernten Repositories  
-`git push myrepro beleg`  
+`git push myrepo beleg`  
 Aktualisierung des master-Branches vom upstream-Repository  
 `git fetch htw-upstream master:master`
 
@@ -63,10 +67,10 @@ alle Änderungen an den versionierten Dateien ins lokale Repr. übergeben
 
 ### Lokales Repro mit entferntem Repro abgleichen
 Änderungen des entfernten Repros ins lokale Repro übernehmen  
-`git pull myrepro`  
+`git pull myrepo`  
 
 lokale Änderungen des Repros ins entfernte Repro übernehmen  
-`git push myrepro beleg`
+`git push myrepo beleg`
 
 ## Integrieren der Änderungen des Upstream-Repositories
 Falls aktualisierte Dateien im HTW-Repository bereitgestellt werden, können diese mit dem eigenen Repository zusammengeführt werden.
