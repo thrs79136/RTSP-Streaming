@@ -101,7 +101,6 @@ Es ist günstiger das Dateihandling mittels Git-Befehlen vorzunehmen, dann werde
 * Datei nur im Index löschen `git rm --cached [file]`
 * Datei verschieben `git mv [file-orig] [file-renamed]`
 
-
 ### Branches
 Für neue Features einer Software eignen sich am Besten ein neuer Branch.
 * Neuen Branch erstellen `git branch [branch-name]`
@@ -130,10 +129,18 @@ Die globale Konfiguration befindet sich in ~/.gitconfig
 * Git-Usernamen  `git config --global url."https://yourusername@github.com".insteadOf "https://github.com"`
 * Git-Passwort cachen  `git config --global credential.helper 'cache –timeout=5400'`
 
-### GUI
+## GUI
 Manchmal ist es sinnvoll, eventuelle Verzweigungen grafisch darzustellen. Hierfür werden zwei Tools bereitgestellt: `gitk` und `smartgit`.
 
-### Hilfe
+## Entwicklungsumgebung und Git
+### Eclipse
+Bei Eclipse erzeugen Sie ein neues Java-Projekt und wählen im Dialog den Ort des lokalen Repositories.
+Wenn Sie die Erweiterung EGit installieren, können Sie innerhalb der IDE Git-Kommandos ausführen.
+
+### Intellij IDEA
+Zum Import wählen Sie einfach: New - Project from Existing Source. Eine sehr gute Git-Unterstützung ist in der IDE integriert - das vorhandene Git-Repository wird automatisch erkannt.
+
+## Hilfe
 `git help`  
 `git help befehl`
 
