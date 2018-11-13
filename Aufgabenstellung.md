@@ -12,7 +12,10 @@ Ergänzen Sie die Klasse RTPpacket entsprechend der in der Projektbeschreibung u
 ### 3. RTSP-Methoden
 Der RTSP-Parser im Client und Server ist sehr primitiv, insbesondere wird nicht auf eine Leerzeile als Abschluss eines Requests gewartet und auch keine gesendet. Beheben Sie dieses Problem, um die nachfolgenden Aufgaben sinnvoll bearbeiten zu können.
 
-Ergänzen Sie die RTSP-Methoden OPTIONS und DESCRIBE anhand der Beispiele aus [RFC 2326](https://www.ietf.org/rfc/rfc2326.txt) und [RFC 2327](https://www.ietf.org/rfc/rfc2327.txt). Es ist ausreichend, sich bei DESCRIBE auf das Beispielvideo zu beziehen. 
+Ergänzen Sie die RTSP-Methoden OPTIONS und DESCRIBE anhand der Beispiele aus [RFC 2326](https://www.ietf.org/rfc/rfc2326.txt) und [RFC 2327](https://www.ietf.org/rfc/rfc2327.txt). 
+Am Client ist dazu jweils ein Button und ein Handler mit dem Request zu programmieren. Die Serverantwort muss nicht ausgewertet werden. Die Anzeige der Serverantwort in der Konsole des Clients genügt.
+
+Es ist ausreichend, sich bei der DESCRIBE-Methode auf das Beispielvideo zu beziehen und die Antwort auf dem Server statisch zu hinterlegen. 
 
 ### 4. Simulation von Paketverlusten
 Simulieren Sie Paketverluste und eine variable Verzögerung im Netz, indem Sie am Sender eine wahlweise Unterdrückung von zu sendenden Paketen vornehmen. Diese Unterdrückung von Paketen sollte zufällig und mit einstellbarer Paketverlustwahrscheinlichkeit über das GUI erfolgen. Beispiel: der Wert 0,1 bedeutet, es werden im Mittel 10% der zu übertragenen Pakete unterdrückt.
