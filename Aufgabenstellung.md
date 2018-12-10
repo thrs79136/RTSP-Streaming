@@ -32,19 +32,19 @@ Machen Sie sich Gedanken über weitere zu überwachende Parameter.
 
 
 ### 6. Implementierung des FEC-Schutzes
-Implementieren Sie einen FEC-Schutz mittels Parity-Check-Code (XOR mit k = 2...20, p = 1). Der Parameter sollte am Server einstellbar sein (GUI / Kommandozeile). Um die Gruppengröße dem Client mitzuteilen gibt es mehrere Möglichkeiten. Der Parameter könnte explizit in einem FEC-Header mitgeteilt werden oder der Client trackt den Wert anhand der Abfolge der Pakete.
+Implementieren Sie einen FEC-Schutz mittels Parity-Check-Code (XOR mit k = 2...20, p = 1). Der Parameter sollte am Server einstellbar sein (GUI / Kommandozeile). Um die Gruppengröße dem Client mitzuteilen gibt es mehrere Möglichkeiten. Der Parameter könnte explizit in einem FEC-Header mitgeteilt werden oder der Client trackt den Wert anhand der Abfolge der Pakete oder Sie implementieren RCF 5109.
 
 Der Server mit FEC-Schutz soll kompatibel zu Clients ohne FEC-Verfahren sein! Nutzen Sie dazu das Feld Payloadtype des RTP-Headers (PT=127 für FEC-Pakete).
-Sie können sich bei der Implementierung an [RFC 5109](https://www.ietf.org/rfc/rfc5109.txt) orientieren, dies ist aber keine Pflicht. Sie sollten aber das Dokument zumindest lesen.
+Sie können sich bei der Implementierung an [RFC 5109](https://www.ietf.org/rfc/rfc5109.txt) orientieren, dies ist aber keine Pflicht. Sie sollten aber das Dokument zumindest lesen und verstehen.
 
 Implementierung Sie FEC über nachfolgende Schritte:
 1. Nutzung einer separaten Klasse FECpacket für das FEC-Handling für Sender und Empfänger, siehe [Architektur](#architekturvorschlag)
 2. Serverseitige Implementierung des XOR-FEC. Nach Auswertung des PT (26) sollte der Client nach wir vor regulär funktionieren.
 3. Entwurf der Architektur der Paket- und Bildverarbeitung im Client
-4. Eingangspuffer im Client implementieren (Größe ca. 1-2 s)
+4. Jitterpuffer im Client implementieren (Größe ca. 1-2 s)
 5. FEC-Korrektur im Client implementieren
 
-Ändern Sie die vorhandenen Klassen nur soweit **nötig**. Halten Sie die Struktur einfach und überschaubar. Nutzen Sie Threads nur wenn dies notwendig ist und Sie die Nebenwirkungen (Blockierungen, Race-Condition) kennen. Bei einer durchdachten Implementierung benötigen Sie keine Threads.
+Ändern Sie die Klassen Client und Server nur soweit **nötig** und verbergen Sie die Korrekturfunktionalität in die FEC-Klasse. Halten Sie die Struktur einfach und überschaubar. Nutzen Sie Threads nur wenn dies notwendig ist und Sie die Nebenwirkungen (Blockierungen, Race-Condition) kennen. Bei einer durchdachten Implementierung benötigen Sie nicht zwingend Threads.
 
 
 #### Architekturvorschlag
@@ -58,10 +58,10 @@ Implementierung Sie FEC über nachfolgende Schritte:
 
 ##### Client
 * Der Client könnte z.B. mit der doppelten Timerrate laufen und dann alle Verarbeitung im Timer-Handler vornehmen (keine Threads).
-• Pakete empfangen und speichern:  `FECpacket.rcvdata() bzw. FECpacket.rcvfec()`
-• Statistiken aktualisieren
-• zur richtigen Zeit (Timeraufruf) das nächste Bild anzeigen: `FECpacket.getjpeg()`
-* Verzögerung des Starts (ca. 1-2s), um den Puffer zu füllen
+* Pakete empfangen und speichern:  `FECpacket.rcvdata() bzw. FECpacket.rcvfec()`
+* Statistiken aktualisieren
+* zur richtigen Zeit (Timeraufruf) das nächste Bild anzeigen: `FECpacket.getjpeg()` Für die Anzeige könnte ein separater Timer genutzt werden, welcher mit der fest eingestellten Abspielgeschwindigkeit läuft (25 Hz). 
+* Verzögerung des Starts (ca. 1-2s), um den Jitterpuffer zu füllen
 
 In dem Klassenrumpf [FECpacket](src/FECpacket.java) finden Sie weitere Informationen.
 
