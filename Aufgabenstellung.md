@@ -65,6 +65,15 @@ Implementierung Sie FEC über nachfolgende Schritte:
 
 In dem Klassenrumpf [FECpacket](src/FECpacket.java) finden Sie weitere Informationen.
 
+#### Debugging
+Es ist relativ unwahrscheinlich, dass das Programm auf Anhieb fehlerfrei funktioniert. Deshalb ist es wichtig, ein Konzept für die Fehlersuche zu entwickeln.
+Hier einige Tipps für die Fehlersuche:
+* Anzeige von Statusinformationen analog zu printheaders() des RTPpackets()
+* Anzeige der ersten Bytes des Payload auf Sender und Empfänger
+* prüfen des Senders auf korrekte Pakete
+* Einstellung eines festen Seeds des Kanalsimulators für wiederholbare Versuche
+* Test ohne bzw. mit Fehlerkorrektur
+* Test der Anzahl verlorener / wiederhergestellter Pakete auf Plausibilität
 
 #### Parameterwahl
 Finden Sie den optimalen Wert für k bei einer Kanalverlustrate von 10%. Optimal bedeutet in diesem Fall eine subjektiv zufriedenstellende Bildqualität bei geringstmöglicher Redundanz.
