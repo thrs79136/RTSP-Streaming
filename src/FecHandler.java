@@ -17,7 +17,7 @@ public class FecHandler {
   HashMap<Integer, Integer> fecNr = new HashMap<>();
   HashMap<Integer, List> fecList = new HashMap<>();
 
-  int playCounter = 0; // starts always by 1, needs to be recoded
+  int playCounter = 0; // SNr of RTP-packet to play next, initialized with first received packet
   int rtpCounter  = 0;
 
   // *** RTP-Header ************************
