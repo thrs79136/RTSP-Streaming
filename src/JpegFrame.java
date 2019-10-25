@@ -231,9 +231,13 @@ public class JpegFrame {
     return jpegFrame;
   }
 
-
+  /**
+   * Kombiniere Liste von RTP-Paketen zu einem JPEG
+   * @param list der RTP-Pakete
+   * @return JPEG
+   */
   public static byte[] combineToOneImage(final List<RTPpacket> list) {
-    List<JpegFrame> jpeg = new ArrayList();
+    ArrayList<JpegFrame> jpeg = new ArrayList<>();
     list.forEach( rtp -> jpeg.add( JpegFrame.getFromRtpPayload( rtp.getpayload()) ) );
 
     JpegFrame jpegs = JpegFrame.combineToOneFrame( jpeg );

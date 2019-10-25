@@ -15,10 +15,10 @@ public class FecHandler {
   HashMap<Integer, RTPpacket> rtpStack = new HashMap<>();
   HashMap<Integer, FECpacket> fecStack = new HashMap<>();
   HashMap<Integer, Integer> fecNr = new HashMap<>();
-  HashMap<Integer, List> fecList = new HashMap<>();
+  HashMap<Integer, List<Integer>> fecList = new HashMap<>();
 
   int playCounter = 0; // SNr of RTP-packet to play next, initialized with first received packet
-  int rtpCounter  = 0;
+  int rtpCounter  = 0; // depreciated
 
   // *** RTP-Header ************************
   static final int MJPEG = 26;
@@ -67,7 +67,7 @@ public class FecHandler {
     }
 
     fecGroupCounter++; // count the packets in the group
-    fec.TimeStamp = rtp.gettimestamp(); // adjust to time stap to the last packet in the group
+    fec.TimeStamp = rtp.gettimestamp(); // adjust the time stamp to the last packet in the group
     fec.addRtp(rtp);
   }
 

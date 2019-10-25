@@ -260,7 +260,6 @@ public class Client {
       if (state == PLAYING) {
         //TASK increase RTSP sequence number
         // ....
-        RTSPSeqNb++;
 
         // Send PAUSE message to the server
         send_RTSP_request("PAUSE");
@@ -389,27 +388,27 @@ public class Client {
         rex.printStackTrace();
       }
 
+      //TASK complete the statistics
       pufferLabel.setText(
           "Puffer: "
-              + (fec.getSeqNr() - fec.getPlayCounter())
+              + ""  //
               + " aktuelle Nr. / Summe empf.: "
-              + fec.getSeqNr()
               + " / "
-              + fec.getNrReceived());
+              + "");
       statsLabel.setText(
           "<html>Abspielzähler / verlorene Bilder: "
-              + fec.getPlayCounter()
+              + ""
               + " / "
-              + fec.getNrLost()
+              + ""
               + "<p/>"
               + "</html>");
       fecLabel.setText(
           "FEC: korrigiert / nicht korrigiert: "
-              + fec.getNrCorrected()
+              + ""
               + " / "
-              + fec.getNrNotCorrected()
+              + ""
               + "  Ratio: "
-              + (df.format((double) fec.getNrNotCorrected() / (double) fec.getSeqNr())));
+              + "");
     }
   }
 
@@ -522,7 +521,8 @@ public class Client {
       // advertising to the server the port used to receive the RTP packets RTP_RCV_PORT
       // otherwise, write the Session line from the RTSPid field
       if (request_type.equals("SETUP")) {
-        rtspReq += "Transport: RTP/AVP;unicast;client_port=" + RTP_RCV_PORT +"-"+ RTP_RCV_PORT+1 + CRLF;
+        //TASK Complete the Transport Attribute
+        rtspReq += "Transport:";
       }
 
       // SessionIS if available
