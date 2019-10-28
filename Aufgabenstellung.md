@@ -37,8 +37,8 @@ Der Server mit FEC-Schutz soll kompatibel zu Clients ohne FEC-Verfahren sein! Nu
 Um nicht die komplette FEC-Funktionalität selbst entwickeln zu müssen, werden Ihnen zwei Klassen bereit gestellt:
 1. [FECpacket](src/FECpacket.java): dies ist eine aus RTPpacket abgeleitete Klasse mit der erweiterten Funktionalität für das Handling von FEC-Paketen (vollständig implementiert)
 2. [FecHandler](src/Fechandler.java): diese Klasse ist zuständig für die server- und clientseitige FEC-Bearbeitung unter Nutzung von FECpacket (teilweise implementiert)
-  Server: Kombination mehrerer Medienpakete zu einem FEC-Paket
-  Client: Jitterpuffer für empfangene Medien- und FEC-Pakete, Bereitstellung des aktuellen Bildinhaltes in Form einer Liste von RTP-Paketen mit gleichem TimeStamp.
+   * Server: Kombination mehrerer Medienpakete zu einem FEC-Paket
+   * Client: Jitterpuffer für empfangene Medien- und FEC-Pakete, Bereitstellung des aktuellen Bildinhaltes in Form einer Liste von RTP-Paketen mit gleichem TimeStamp.
 
 
 Die Fehlerkorrektur im FecHandler ist noch zu implementieren. Dazu ist die vorhandene Architektur zu analysieren.
