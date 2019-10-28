@@ -10,15 +10,13 @@ Ergänzen Sie die Klasse Client entsprechend der in der Projektbeschreibung und 
 Ergänzen Sie die Klasse RTPpacket entsprechend der in der Projektbeschreibung und den Kommentaren im Quelltext gegebenen Hinweisen.
 
 ### 3. RTSP-Methoden
-Der RTSP-Parser im Client und Server ist sehr primitiv, insbesondere wird nicht auf eine Leerzeile als Abschluss eines Requests gewartet und auch keine gesendet. Beheben Sie dieses Problem, um die nachfolgenden Aufgaben sinnvoll bearbeiten zu können.
-
 Ergänzen Sie die RTSP-Methoden OPTIONS und DESCRIBE anhand der Beispiele aus [RFC 2326](https://www.ietf.org/rfc/rfc2326.txt) und [RFC 2327](https://www.ietf.org/rfc/rfc2327.txt). 
-Am Client ist dazu jweils ein Button und ein Handler mit dem Request zu programmieren. Die Serverantwort muss nicht ausgewertet werden. Die Anzeige der Serverantwort in der Konsole des Clients genügt.
+Die Serverantwort muss nicht ausgewertet werden. Die Anzeige der Antwort in der Konsole des Clients genügt.
 
 Es ist ausreichend, sich bei der DESCRIBE-Methode auf das Beispielvideo zu beziehen und die Antwort auf dem Server statisch zu hinterlegen. 
 
 ### 4. Simulation von Paketverlusten
-Simulieren Sie Paketverluste und eine variable Verzögerung im Netz, indem Sie am Sender eine wahlweise Unterdrückung von zu sendenden Paketen vornehmen. Diese Unterdrückung von Paketen sollte zufällig und mit einstellbarer Paketverlustwahrscheinlichkeit über das GUI erfolgen. Beispiel: der Wert 0,1 bedeutet, es werden im Mittel 10% der zu übertragenen Pakete unterdrückt.
+Simulieren Sie Paketverluste und eine variable Verzögerung im Netz, indem Sie am Sender eine wahlweise Unterdrückung von zu sendenden Paketen vornehmen. Diese Unterdrückung von Paketen sollte zufällig und mit einstellbarer Paketverlustwahrscheinlichkeit über das GUI erfolgen. Beispiel: der Wert 0,1 bedeutet, es werden im Mittel 10% der zu übertragenen Pakete unterdrückt. Passen dazu den Quelltext im Server an.
 
 ### 5. Anzeige von Statistiken am Client
 Um die simulierten Netzwerkeigenschaften prüfen zu können und die Leistungsfähigkeit der später zu integrierenden Fehlerschutzcodes einschätzen zu können, ist eine Statistikanzeige notwendig.
@@ -28,14 +26,25 @@ Folgende Werte sollten mindestens am Client angezeigt werden:
 3. Die Anzeige sollte bis zum Ende des Videos sekündlich aktualisiert werden und dann auf dem Gesamtstand stehen bleiben.
 
 Mit dem ersten Punkt kann die Qualität der Verbindung eingeschätzt werden und mit dem zweiten Punkt die Leistungsfähigkeit des FEC-Verfahrens.
-Machen Sie sich Gedanken über weitere zu überwachende Parameter.
+Machen Sie sich Gedanken über weitere zu überwachende Parameter. Die meisten dieser Daten können aus dem FecHandler entnommen werden. Verifizieren Sie die korrekte Berechnung dieser Werte.
 
 
 ### 6. Implementierung des FEC-Schutzes
-Implementieren Sie einen FEC-Schutz mittels Parity-Check-Code (XOR mit k = 2...20, p = 1). Der Parameter sollte am Server einstellbar sein (GUI / Kommandozeile). Um die Gruppengröße dem Client mitzuteilen gibt es mehrere Möglichkeiten. Der Parameter könnte explizit in einem FEC-Header mitgeteilt werden oder der Client trackt den Wert anhand der Abfolge der Pakete oder Sie implementieren RCF 5109.
 
+Implementieren Sie einen FEC-Schutz gemäß [RFC 5109](https://www.ietf.org/rfc/rfc5109.txt).
 Der Server mit FEC-Schutz soll kompatibel zu Clients ohne FEC-Verfahren sein! Nutzen Sie dazu das Feld Payloadtype des RTP-Headers (PT=127 für FEC-Pakete).
-Sie können sich bei der Implementierung an [RFC 5109](https://www.ietf.org/rfc/rfc5109.txt) orientieren, dies ist aber keine Pflicht. Sie sollten aber das Dokument zumindest lesen und verstehen.
+
+Um nicht die komplette FEC-Funktionalität selbst entwickeln zu müssen, werden Ihnen zwei Klassen bereit gestellt:
+1. [FECpacket](src/FECpacket.java): dies ist eine aus RTPpacket abgeleitete Klasse mit der erweiterten Funktionalität für das Handling von FEC-Paketen (vollständig implementiert)
+2. [FecHandler](src/Fechandler.java): diese Klasse ist zuständig für die server- und clientseitige FEC-Bearbeitung unter Nutzung von FECpacket (teilweise implementiert)
+  Server: Kombination mehrerer Medienpakete zu einem FEC-Paket
+  Client: Jitterpuffer für empfangene Medien- und FEC-Pakete, Bereitstellung des aktuellen Bildinhaltes in Form einer Liste von RTP-Paketen mit gleichem Timestamp.
+
+
+Die Fehlerkorrektur im FecHandler ist noch zu implementieren. 
+
+Alternativ können Sie die Klasse FecHandler auch komplett neu entwerfen und nur die fertige Klasse FECpacket übernehmen.
+
 
 Implementierung Sie FEC über nachfolgende Schritte:
 1. Nutzung einer separaten Klasse FECpacket für das FEC-Handling für Sender und Empfänger, siehe [Architektur](#architekturvorschlag)
@@ -44,26 +53,33 @@ Implementierung Sie FEC über nachfolgende Schritte:
 4. Jitterpuffer im Client implementieren (Größe ca. 1-2 s)
 5. FEC-Korrektur im Client implementieren
 
-Ändern Sie die Klassen Client und Server nur soweit **nötig** und verbergen Sie die Korrekturfunktionalität in die FEC-Klasse. Halten Sie die Struktur einfach und überschaubar. Nutzen Sie Threads nur wenn dies notwendig ist und Sie die Nebenwirkungen (Blockierungen, Race-Condition) kennen. Bei einer durchdachten Implementierung benötigen Sie nicht zwingend Threads.
 
-
-#### Architekturvorschlag
+#### Architektur der Paketverarbeitung
 
 ##### Server
-* der Server kann die gesamte Verarbeitung im vorhandenen Timer-Handler vornehmen
-* Nutzdaten speichern: `FECpacket.setdata()`
+* der Server nimmt die gesamte Verarbeitung im vorhandenen Timer-Handler vor
+* Nutzdaten speichern: `FecHandler.setRtp()`
 * Nutzdaten senden
-* nach Ablauf des Gruppenzählers berechnetes FEC-Paket entgegennehmen und senden: `FECpacket.getdata()`
-* Kanalemulator jeweils für Medien- und FEC-Pakete aufrufen
+* Prüfung auf Erreichen der Gruppengröße: `FecHandler.isReady()`
+* nach Ablauf des Gruppenzählers berechnetes FEC-Paket entgegennehmen und senden: `FecHandler.getPacket()`
+* Kanalemulator jeweils für Medien- und FEC-Pakete aufrufen: `sendPacketWithError()`
 
 ##### Client
-* Der Client könnte z.B. mit der doppelten Timerrate laufen und dann alle Verarbeitung im Timer-Handler vornehmen (keine Threads).
-* Pakete empfangen und speichern:  `FECpacket.rcvdata() bzw. FECpacket.rcvfec()`
+* Der Client nutzt getrennte Timer-Handler für den Empfang der Pakete und für das periodische Anzeigen der Bilder (keine Threads notwendig).
+* Pakete empfangen per Timer
+* Pakete im Jitterpuffer speichern:  `FecHandler.rcvRtpPacket()`
 * Statistiken aktualisieren
-* zur richtigen Zeit (Timeraufruf) das nächste Bild anzeigen: `FECpacket.getjpeg()` Für die Anzeige könnte ein separater Timer genutzt werden, welcher mit der fest eingestellten Abspielgeschwindigkeit läuft (25 Hz). 
-* Verzögerung des Starts (ca. 1-2s), um den Jitterpuffer zu füllen
+* zur richtigen Zeit (Timeraufruf) das nächste Bild anzeigen: `FecHandler.getNextRtpList()`  Timer, welcher mit der fest eingestellten Abspielgeschwindigkeit läuft (25 Hz). 
+* Verzögerung des Starts des Abspielens (ca. 2s), um den Jitterpuffer zu füllen
 
-In dem Klassenrumpf [FECpacket](src/FECpacket.java) finden Sie weitere Informationen.
+##### FecHandler
+* Server: Hinzufügen eines RTP-Paketes zum FEC-Paket
+* Speicherung der ankommenden Pakete in einer HashMap getrennt nach PayloadType, Zugriff über Sequenznummer
+* Generierung einer Liste aller betroffenen RTP-Pakete für jedes FEC-Paket
+* Speicherung der Sequenznummer des FEC-Packets und der Liste aller betroffenen RTP-Pakete für jedes RTP-Paket in zwei HashMaps (fecNr, fecList)
+* Rückgabe einer Liste aller RTP-Pakete mit gleichem Timestamp
+* ist ein RTP-Paket nicht vorhanden, dann Prüfung auf Korrigierbarkeit `checkCorrection()` und u.U. Korrektur `correctRTP()`
+* periodisches Löschen alter nicht mehr benötigter Einträge im Jitterpuffer
 
 #### Debugging
 Es ist relativ unwahrscheinlich, dass das Programm auf Anhieb fehlerfrei funktioniert. Deshalb ist es wichtig, ein Konzept für die Fehlersuche zu entwickeln.
@@ -78,11 +94,18 @@ Hier einige Tipps für die Fehlersuche:
 #### Parameterwahl
 Finden Sie den optimalen Wert für k bei einer Kanalverlustrate von 10%. Optimal bedeutet in diesem Fall eine subjektiv zufriedenstellende Bildqualität bei geringstmöglicher Redundanz.
 
+
+#### Kompatibilität
+Prüfen Sie die Kompatibilität des Clients und Servers mit dem VLC-Player und versuchen Sie eventuelle Probleme zu analysieren.
+
+#### Vorschläge
+Manchen Sie konkrete Vorschläge zur Verbesserungen des Belegs.
+
 #### Dokumentation
 Dokumentieren Sie Ihr Projekt. Beschreiben Sie die Architektur Ihrer Implementierung anhand sinnvoller Softwarebeschreibungsmethoden (Klassendiagramm, Zustandsdiagramm, etc.). Eine Quellcodekommentierung ist dazu nicht ausreichend!
 
 ## Optional
-Binden Sie ein eigenes Video ein. Dazu ist entweder das Video entsprechend der Struktur der Klasse VideoStream anzupassen oder die Klasse [VideoStream](src/VideoStream.java) ist für das einfache Einlesen (erkennen von SOI und EOI-Markern) von JPEGs anzupassen.
+Binden Sie bei Bedarf ein eigenes Video ein. Eine Umcodierung zu MJPEG kann zum Beipsiel mittels VLC-Player erfolgen.
 
 
 ## Literatur

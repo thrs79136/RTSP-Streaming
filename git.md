@@ -5,9 +5,9 @@ Erzeugen Sie einen eigenen GitHub-Account falls Sie noch keinen haben. Senden Si
 
 Erzeugen Sie auf HTWDD-RN ein eigenes **privates** Repository mit einem Namen entsprechend Ihrer S-Nummer und des Modulkürzels (`yyy=[rn|it1|it2|sn|vs]`) in der Form `sXXXX-yyy-beleg` . Fügen Sie als Kommentar Ihren **Namen** hinzu, um die Zuordnung zu erleichtern. Dies können Sie auch nachträglich auf der Website des betreffenden Repositories tuen, wenn Sie beim Code-Tab den Edit-Button benutzen.
 
-Den Name des zu klonenden Repositories finden Sie auf der Vorlesungswebsite.
+Den Namen des zu klonenden Repositories finden Sie auf der Vorlesungswebsite.
 
-## Eigenes Repository verknüpfen
+## Eigenes Repository mit Aufgaben-Repository verknüpfen
 Repository lokal klonen  
 `git clone https://github.com/HTWDD-RN/"Name des zu klonenden Repositories"`
 
@@ -21,13 +21,14 @@ Anlegen der Verknüpfung (myrepo) mit dem eigenen entfernten Repository
 Syntax: `git remote add [alias] [url]`     
 Beispiel: `git remote add myrepo https://github.com/HTWDD-RN/sxxxxx-yyy-beleg`
 
-Aktualisierung des eigenen entfernten Repositories  
-`git push myrepo master`
+Aktualisierung des eigenen entfernten Repositories mit aktuellem Branch  
+`git push myrepo`
 
 
 ## Arbeiten im eigenen Branch
 Oft ist es sinnvoll, nicht im master-Branch zu arbeiten, sondern in einem eigenen Branch.
 Dadurch kann der master-Branch immer mit dem upstream-Repository synchron gehalten werden.
+Master steht hier für den Standard-Branch, dieser kann auch einen anderen Namen haben, z.B. WS-2019.
 
 Erzeuge neuen Branch `beleg` und wechsle in diesen:  
 `git checkout -b beleg`  
@@ -44,7 +45,7 @@ myrepo	        https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (fetch)
 myrepo	        https://nutzer@github.com/HTWDD-RN/sXXXXX-yyy-beleg (push)
 ```
 
-Mittels `git branch -vv` wird die Zuordnung der lokalen Branches zu den Remote-Branches angezeigt (der Marker * zeigt den aktiven Branch an):
+Mittels `git branch -vva` wird die Zuordnung der lokalen Branches zu den Remote-Branches angezeigt (der Marker * zeigt den aktiven Branch an):
 ```
 * beleg  8b1e446 [myrepo/beleg]
   master 2eb7c88 [htw-upstream/master]

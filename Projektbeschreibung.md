@@ -1,9 +1,10 @@
 # Projektrahmen
 Im Praktikum werden Sie einen Client und Server für Videostreaming unter Nutzung des Real-Time-Streaming-Protokolls [RTSP](http://www.ietf.org/rfc/rfc2326.txt) implementieren. Die eigentlichen Videodaten werden mittels Real-Time-Protokoll [RTP](http://www.ietf.org/rfc/rfc3550.txt) übertragen. Ein großer Teil der Funktionalität ist bereits als Quelltext vorhanden, so das RTSP-Protokoll im Server, das RTP-Handling im Client sowie die Videoanzeige.
 Ihre Aufgabe besteht im Wesentlichen aus der Ergänzung der Quellcodes in den Punkten:
-* RTSP-Protokoll im Client 
-* RTP-Protokoll im Server
-* FEC in Client und Server
+* RTSP-Protokoll im Client vervollständigen
+* RTSP-Protokoll, Methoden DESCRIBE und OPTIONS im Server vervollständigen
+* RTP-Protokoll, Header im Server setzen
+* FEC in Client, Paketkorrektur implementierne
 
 ## 1. Java-Klassen
 Das Projekt besteht aus folgenden Java-Klassen:
@@ -11,17 +12,19 @@ Das Projekt besteht aus folgenden Java-Klassen:
 [Client](src/Client.java): Funktionalität des Clients mit Benutzerschnittstelle zum Senden der RTSP-Kommandosund Anzeige des Videos  
 [Server](src/Server.java): Funktionalität des Servers zur Antwort auf die RTSP-Clientanfragen und Streaming des Videos  
 [RTPpacket](src/RTPpacket.java): Funktionalität zur Unterstützung von RTP-Paketen  
-[FECpacket](src/FECpacket.java): Erweiterung der RTP-Klasse mit FEC-Funktionalität
-[FecHandler](src/FecHandler.java): Funktionalität zur Unterstützung der Fehlerkorrektur mittels FEC  
-[VideoStream](src/VideoStream.java): Funktionalität zum Einlesen einer MJPEG-Datei auf der Serverseite
+[FECpacket](src/FECpacket.java): Erweiterung der RTP-Klasse mit FEC-Funktionalität  
+[FecHandler](src/FecHandler.java): Unterstützung der Fehlerkorrektur mittels FEC  
+[VideoReader](src/VideoReader.java): Einlesen einer MJPEG-Datei auf der Serverseite  
+[JpegFrame](src/JpegFrame): Codierung/Decodierung von JPEG-Bildern gemäß RFC-2435
 
 ## 2. Programmstart
 Der Start des Servers erfolgt mittels `java Server RTSP-Port`. Der Standard-RTSP-Port ist 554, Sie werden aber im Praktikum einen Port > 1024 nutzen. Der Start des Clients erfolgt mittels `java Client server_name server_port video_file`. Am Client können RTSP-Kommandos angefordert werden. 
 Eine Kommunikation läuft in der Regel folgendermaßen ab:  
-1. Client sendet SETUP: Erzeugung der Session und der Transportparameter
-2. Client sendet PLAY 
-3. Client sendet u.U. PAUSE
-4. Client sendet TEARDOWN: Terminierung der Session.
+1. Client sendet DESCRIBE: Analyse der vorhandenen Streams und Parameter einer gewünschten Präsentation
+2. Client sendet SETUP: Erzeugung der Session und der Transportparameter anhand der vorab ermittelten Parameter
+3. Client sendet PLAY 
+4. Client sendet u.U. PAUSE
+5. Client sendet TEARDOWN: Terminierung der Session.
 Der Server antwortet auf alle Clientrequests. Die Antwortcodes sind ähnlich zu HTTP. Der Code 200 bedeutet z.B. Erfolg. Die RTSP-Antwortcodes finden Sie in [RTSP](http://www.ietf.org/rfc/rfc2326.txt).
 
 ## 3. Client
@@ -45,32 +48,25 @@ Als ersten Schritt sollte das RTSP-Protokoll in den Handlern der Buttons des Ben
 * Einlesen der RTSP-Antwort
 
 ### Beispiel
-Im Praktikum wird ein sehr einfacher Parser im Server verwendet, welcher die Daten in einer bestimmten Reihenfolge erwartet. Bitte orientieren Sie sich an dem folgenden Beispiel (C-Client,S-Server). Insbesondere sind die **Leerzeichen** zu beachten (`client_port`) und die Request-URLdarf nur relativ sein (ohne `rtsp://host`).
+Bitte beachten Sie, dass der im Praktikum verwendete RTSP-Parser im Client und Server nur eine Untermenge an möglichen Attributen unterstützt. Im Zweifelsfall schauen Sie bitte in die jeweilige Implementierung. 
+Sie können sich an dem folgenden Beispiel orientieren (C-Client,S-Server). je nach Konfiguration Ihres Rechners müssen Sie unter Umständen mit FQDN arbeiten (\zb idefix.informatik.htw-dresden.de)
 ```
-C: OPTIONS movie.Mjpeg RTSP/1.0
+C: OPTIONS rtsp://idefix/htw.mjpeg RTSP/1.0
  : CSeq: 1
 
 S: RTSP/1.0 200 OK
  : CSeq: 1
  : Public: DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE
 
-C: SETUP movie.Mjpeg RTSP/1.0
- : CSeq: 1
- : Transport: RTP/UDP; client_port= 25000
-
-S: RTSP/1.0 200 OK
- : CSeq: 1
- : Session: 123456
-
-C: PLAY movie.Mjpeg RTSP/1.0
+C: SETUP rtsp://idefix/htw.mjpeg RTSP/1.0
  : CSeq: 2
- : Session: 123456
+ : Transport: RTP/UDP;unicast;client_port=25000-25001
 
 S: RTSP/1.0 200 OK
  : CSeq: 2
  : Session: 123456
 
-C: PAUSE movie.Mjpeg RTSP/1.0
+C: PLAY rtsp://idefix/htw.mjpeg RTSP/1.0
  : CSeq: 3
  : Session: 123456
 
@@ -78,8 +74,16 @@ S: RTSP/1.0 200 OK
  : CSeq: 3
  : Session: 123456
 
-C: TEARDOWN movie.Mjpeg RTSP/1.0
+C: PAUSE rtsp://idefix/htw.mjpeg RTSP/1.0
  : CSeq: 4
+ : Session: 123456
+
+S: RTSP/1.0 200 OK
+ : CSeq: 4
+ : Session: 123456
+
+C: TEARDOWN rtsp://htw.mjpeg RTSP/1.0
+ : CSeq: 5
  : Session: 123456
 ```
 
