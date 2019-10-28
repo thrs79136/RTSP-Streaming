@@ -38,20 +38,17 @@ Um nicht die komplette FEC-Funktionalität selbst entwickeln zu müssen, werden 
 1. [FECpacket](src/FECpacket.java): dies ist eine aus RTPpacket abgeleitete Klasse mit der erweiterten Funktionalität für das Handling von FEC-Paketen (vollständig implementiert)
 2. [FecHandler](src/Fechandler.java): diese Klasse ist zuständig für die server- und clientseitige FEC-Bearbeitung unter Nutzung von FECpacket (teilweise implementiert)
   Server: Kombination mehrerer Medienpakete zu einem FEC-Paket
-  Client: Jitterpuffer für empfangene Medien- und FEC-Pakete, Bereitstellung des aktuellen Bildinhaltes in Form einer Liste von RTP-Paketen mit gleichem Timestamp.
+  Client: Jitterpuffer für empfangene Medien- und FEC-Pakete, Bereitstellung des aktuellen Bildinhaltes in Form einer Liste von RTP-Paketen mit gleichem TimeStamp.
 
 
-Die Fehlerkorrektur im FecHandler ist noch zu implementieren. 
+Die Fehlerkorrektur im FecHandler ist noch zu implementieren. Dazu ist die vorhandene Architektur zu analysieren.
+Die vorhandene Struktur ist in  [Architektur](#architekturvorschlag) beschrieben.
+Um die Fehlerkorrektur im Client effizient zu implementieren, ist es sinnvoll, die `setRtp()`-Methode zu analysieren.
 
 Alternativ können Sie die Klasse FecHandler auch komplett neu entwerfen und nur die fertige Klasse FECpacket übernehmen.
 
 
-Implementierung Sie FEC über nachfolgende Schritte:
-1. Nutzung einer separaten Klasse FECpacket für das FEC-Handling für Sender und Empfänger, siehe [Architektur](#architekturvorschlag)
-2. Serverseitige Implementierung des XOR-FEC. Nach Auswertung des PT (26) sollte der Client nach wir vor regulär funktionieren.
-3. Entwurf der Architektur der Paket- und Bildverarbeitung im Client
-4. Jitterpuffer im Client implementieren (Größe ca. 1-2 s)
-5. FEC-Korrektur im Client implementieren
+
 
 
 #### Architektur der Paketverarbeitung
@@ -102,10 +99,11 @@ Prüfen Sie die Kompatibilität des Clients und Servers mit dem VLC-Player und v
 Manchen Sie konkrete Vorschläge zur Verbesserungen des Belegs.
 
 #### Dokumentation
+Im Falle einer eigenen Architektur ist eine Dokumentation notwendig, ansonsten nicht.
 Dokumentieren Sie Ihr Projekt. Beschreiben Sie die Architektur Ihrer Implementierung anhand sinnvoller Softwarebeschreibungsmethoden (Klassendiagramm, Zustandsdiagramm, etc.). Eine Quellcodekommentierung ist dazu nicht ausreichend!
 
 ## Optional
-Binden Sie bei Bedarf ein eigenes Video ein. Eine Umcodierung zu MJPEG kann zum Beipsiel mittels VLC-Player erfolgen.
+Binden Sie bei Bedarf ein eigenes Video ein. Eine Umcodierung zu MJPEG kann zum Beispiel mittels VLC-Player erfolgen.
 
 
 ## Literatur
