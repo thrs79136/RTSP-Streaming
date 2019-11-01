@@ -233,7 +233,6 @@ public class Client {
       if (state == READY) {
         //TASK increase RTSP sequence number
         // .....
-        RTSPSeqNb++;
 
         // Send PLAY message to the server
         send_RTSP_request("PLAY");

@@ -3,7 +3,6 @@ Server
 usage: java Server [RTSP listening port]
 ---------------------- */
 
-import com.sun.org.apache.regexp.internal.RE;
 import java.io.*;
 import java.net.*;
 import java.awt.*;
