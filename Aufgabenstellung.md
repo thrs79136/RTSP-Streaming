@@ -4,7 +4,7 @@ Die Aufgaben beziehen sich auf den Beleg Videostreaming für das Modul Internett
 ## Aufgaben
 
 ### 1. Client
-Ergänzen Sie die Klasse Client entsprechend der in der Projektbeschreibung und den Kommentaren im Quelltext gegebenen Hinweisen.
+Ergänzen Sie die Klasse Client entsprechend der in der Projektbeschreibung und den Kommentaren im Quelltext gegebenen Hinweisen. Damit wird das RTSP-Protokoll im Client vervollständigt. Lassen die den Abschnitt zur Statistik zunächst unbearbeitet. Dieser Teil in Abschnitt 5 bearbeitet.
 
 ### 2. Server
 Ergänzen Sie die Klasse RTPpacket entsprechend der in der Projektbeschreibung und den Kommentaren im Quelltext gegebenen Hinweisen.
