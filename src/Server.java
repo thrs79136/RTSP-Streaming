@@ -23,7 +23,8 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
   int RTP_dest_port = 0; // destination port for RTP packets  (given by the RTSP Client)
   int FEC_dest_port = 0; // destination port for RTP-FEC packets  (RTP or RTP+2)
   final static int startGroupSize = 2;
-  FecHandler fec = new FecHandler(startGroupSize);
+  FecHandler fec;
+  //FecHandler fec = new FecHandler(startGroupSize);
   // Channel errors
   private double lossRate = 0.0;
   Random random = new Random(123456); // fixed seed for debugging
@@ -190,8 +191,9 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
           theServer.video = new VideoReader(VideoFileName);
           imagenb = 0;
 
-          // init RTP socket
+          // init RTP socket and FEC
           theServer.RTPsocket = new DatagramSocket();
+          theServer.fec = new FecHandler(startGroupSize);
           break;
 
         case PLAY:

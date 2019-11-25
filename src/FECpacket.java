@@ -47,6 +47,11 @@
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 */
 
+/**
+ * @author Jörg Vogt
+ * @version 1.0
+ */
+
 import java.util.ArrayList;
 
 public class FECpacket extends RTPpacket {

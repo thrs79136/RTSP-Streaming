@@ -4,7 +4,7 @@
 # für Eclipse sind die Verzeichnisse entsprechend anzupassen
 
 port=3333
-# video=videos/htw.mjpeg
+#video=videos/htw.mjpeg
 video=htw.mjpeg
 src=src
 bin=out/production/RTSP-Streaming
