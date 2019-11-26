@@ -215,10 +215,6 @@ public class Client {
 
           // timerPlay.setInitialDelay(0);
 
-          // Init the FEC-handler
-          fec = new FecHandler();
-          timerPlay.setInitialDelay(2000);
-
         } catch (SocketException se) {
           System.out.println("Socket exception: " + se);
           System.exit(0);
