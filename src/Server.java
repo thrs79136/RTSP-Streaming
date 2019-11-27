@@ -79,7 +79,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
     // init Timer
     timer = new Timer(FRAME_PERIOD, this);
     timer.setInitialDelay(0);
-    timer.setCoalesce(true);
+    timer.setCoalesce(false); // Coalesce can lead to buffer underflow in client
 
     // Handler to close the main window
     addWindowListener(

@@ -252,7 +252,7 @@ public class FecHandler {
     list.add(rtp);
     int ts = rtp.gettimestamp();
     List<Integer> rtpList = tsList.get(ts); // list of RTPs with same time stamp
-
+    if (rtpList == null) return list; // if list is empty
 
     //TODO lost RTPs are not in the list but could perhaps be corrected -> check for snr
     //add all RTPs but the first which is already included
