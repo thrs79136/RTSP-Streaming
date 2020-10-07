@@ -49,7 +49,7 @@ Als ersten Schritt sollte das RTSP-Protokoll in den Handlern der Buttons des Ben
 
 ### Beispiel
 Bitte beachten Sie, dass der im Praktikum verwendete RTSP-Parser im Client und Server nur eine Untermenge an möglichen Attributen unterstützt. Im Zweifelsfall schauen Sie bitte in die jeweilige Implementierung. 
-Sie können sich an dem folgenden Beispiel orientieren (C-Client,S-Server). je nach Konfiguration Ihres Rechners müssen Sie unter Umständen mit FQDN arbeiten (\zb idefix.informatik.htw-dresden.de)
+Sie können sich an dem folgenden Beispiel orientieren (C-Client, S-Server). je nach Konfiguration Ihres Rechners müssen Sie unter Umständen mit FQDN arbeiten (z.B. idefix.informatik.htw-dresden.de)
 ```
 C: OPTIONS rtsp://idefix/htw.mjpeg RTSP/1.0
  : CSeq: 1
