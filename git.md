@@ -7,6 +7,9 @@ Erzeugen Sie auf HTWDD-RN ein eigenes **privates** Repository mit einem Namen en
 
 Den Namen des zu klonenden Repositories finden Sie auf der Vorlesungswebsite.
 
+Die Fakultät Informatik stellt Ihnen (unabhängig vom RZ) ein Homeverzeichnis bereit, welches unter /user/data/i[a,m,w][0,1,2][0-9]/sXXXXX gemountet ist. Auf dieses können Sie im Labor S311 einfach zugreifen.
+
+
 ## Eigenes Repository mit Aufgaben-Repository verknüpfen
 Repository lokal klonen  
 `git clone https://github.com/HTWDD-RN/"Name des zu klonenden Repositories"`
