@@ -70,23 +70,28 @@ public class RTPpacket {
     // ! Do not forget to uncomment method printheader() below, if desired !
   }
 
+  public String toBitString(byte b){
+    return String.format("%8s", Integer.toBinaryString(header[0] & 0xFF)).replace(' ', '0');
+  }
 
   public void setRtpHeader() {
-    //TASK fill the header array of byte with RTP header fields
-    /*
-    header[0] =
-    header[1] =
-    header[2] =
-    header[3] =
-    header[4] =
-    header[5] =
-    header[6] =
-    header[7] =
-    header[8] =
-    header[8] =
-    header[10] =
-    header[11] =
-     */
+    //TASK_F fill the header array of byte with RTP header fields
+    header[0] |= (byte)((Version & 0x3) << 6);
+    header[0] |= (byte)((Padding & 0x1) << 5);
+    header[0] |= (byte)((Extension & 0x1) << 4);
+    header[0] |= (byte)(CC & 0x7);
+    header[1] |= (byte)((Marker & 0x1)<<7);
+    header[1] |= (byte)(PayloadType & 0x7f);
+    header[2] = (byte)(SequenceNumber >> 8);
+    header[3] = (byte)(SequenceNumber & 0xff);
+    header[4] = (byte)(TimeStamp >> 24);
+    header[5] = (byte)((TimeStamp & 0xff0000) >> 16);
+    header[6] = (byte)((TimeStamp & 0xff00) >> 8);
+    header[7] = (byte)(TimeStamp & 0xff);
+    header[8] = (byte)(Ssrc >> 24);
+    header[9] = (byte)((Ssrc & 0xff0000) >> 16);
+    header[10] = (byte)((Ssrc & 0xff00) >> 8);
+    header[11] = (byte)(Ssrc & 0xff);
   }
 
 

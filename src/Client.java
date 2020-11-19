@@ -428,6 +428,7 @@ public class Client {
 
         // display the image as an ImageIcon object
         icon = new ImageIcon(image);
+        System.out.println("new imageicon");
         iconLabel.setIcon(icon);
 
       } catch (RuntimeException rex) {
@@ -504,6 +505,7 @@ public class Client {
 
           case "content-length:":
             cl = Integer.parseInt(headerField.nextToken());
+            System.out.println("Content length: " + Integer.toString(cl));
             break;
 
           case "public:":
@@ -512,6 +514,7 @@ public class Client {
 
           case "content-type:":
             String ct = headerField.nextToken();
+            System.out.println("received content type");
             System.out.println("Content-Type: " + ct);
             break;
 
@@ -569,7 +572,8 @@ public class Client {
       // otherwise, write the Session line from the RTSPid field
       if (request_type.equals("SETUP")) {
         //TASK_F Complete the Transport Attribute
-        rtspReq += "Transport: rtp/upd; compression; port=" + Integer.toString(RTP_RCV_PORT) + "; mode=PLAY" + CRLF;
+        rtspReq += "Transport: rtp/upd; compression; port=" + Integer.toString(RTP_RCV_PORT) + "-" +
+                Integer.toString(RTP_RCV_PORT+1) +"; mode=PLAY" + CRLF;
       }
 
       // SessionIS if available
