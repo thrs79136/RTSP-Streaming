@@ -443,23 +443,21 @@ public class Client {
           "Puffer: "
               + ""  //
               + " aktuelle Nr. / Summe empf.: "
-              + fec.getPlayCounter() + " / " + fec.getNrReceived()
+              + fec.getSeqNr() + " / " + fec.getNrReceived()
               + "");
       statsLabel.setText(
           "<html>Abspielzähler / verlorene Medienpakete // Bilder / verloren: "
+              + fec.getPlayCounter()
+              + " / "
               + fec.getNrLost()
+              + " // "
+              + fec.getNrFramesRequested()
               + " / "
               + fec.getNrFramesLost()
               + "<p/>"
               + "</html>");
 
-      float ratio;
-      if (fec.getNrCorrected()!=0 && fec.getNrNotCorrected()!=0) {
-        ratio = (float)fec.getNrNotCorrected() / (float)fec.getNrCorrected();
-      }
-      else {
-        ratio = 0;
-      }
+      float ratio = (float)fec.getNrNotCorrected()/(float)fec.getSeqNr();
       fecLabel.setText(
           "FEC: korrigiert / nicht korrigiert: "
               + fec.getNrCorrected()
