@@ -96,6 +96,7 @@ public class FECpacket extends RTPpacket {
    */
   public FECpacket(int PType, int Framenb, int Time, int maxGroupSize, int snBase) {
     super(PType, Framenb, Time, new byte[0], 0);
+    if (Framenb==4) System.out.println("after super FECPacket.java");
     setFecHeader(maxGroupSize, snBase);
     setUlpLevelHeader(0,0,maxGroupSize);
   }
@@ -224,7 +225,7 @@ public class FECpacket extends RTPpacket {
    */
   @Override
   public byte[] getpacket() {
-    System.out.println("FEC packet: " + payload_size + " " + payload.length);
+    // System.out.println("FEC packet: " + payload_size + " " + payload.length);
     byte[] packet = new byte[payload_size + headerAll];
     setRtpHeader(); // set RTP Header again because of changing time stamp
     // RTP Header from array
@@ -337,7 +338,11 @@ public class FECpacket extends RTPpacket {
    */
   public RTPpacket getLostRtp(int snr) {
     // TODO get the correct SNr
-    return new RTPpacket(ptRecovery, snr  ,tsRecovery, payload, lengthRecovery);
+    // if (snr==4) System.out.println("FECPacket.java");
+    RTPpacket newRTP = new RTPpacket(ptRecovery, snr  ,tsRecovery, payload, lengthRecovery);
+
+    return newRTP;
+    // return new RTPpacket(ptRecovery, snr  ,tsRecovery, payload, lengthRecovery);
   }
 
 

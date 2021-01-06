@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +16,10 @@ import java.util.List;
 */
 
 public class FecHandler {
+  // Debugging TASK remove
+  File file;
+  FileWriter fw;
+
   RTPpacket rtp;
   FECpacket fec;
 
@@ -62,6 +69,19 @@ public class FecHandler {
    */
   public FecHandler(boolean useFec) {
     this.useFec = useFec;
+    file = new File("/home/theresa/Debug/debug.txt");
+
+  }
+
+  public void write2File(String x){
+    try {
+      fw = new FileWriter("/home/theresa/Debug/debug.txt", true);
+      fw.write(x);
+      fw.close();
+    } catch(IOException e) {
+      e.printStackTrace();
+
+    }
   }
 
   // *************** Sender SET *******************************************************************
@@ -96,7 +116,7 @@ public class FecHandler {
    * @return Bitstream of FEC-Packet including RTP-Header
    */
   public byte[] getPacket() {
-    fec.printHeaders();
+    // fec.printHeaders();
     // Adjust and reset all involved variables
     fecSeqNr++;
     fecGroupCounter = 0;
@@ -141,8 +161,8 @@ public class FecHandler {
       if (list == null) list = new ArrayList<>();
       list.add(seqNr);
       tsList.put( ts, list );
-      System.out.println("FEC: set media nr: " + seqNr);
-      System.out.println("FEC: set ts-list: " + (0xFFFFFFFFL & ts) + " " + list.toString());
+      // System.out.println("FEC: set media nr: " + seqNr);
+      // System.out.println("FEC: set ts-list: " + (0xFFFFFFFFL & ts) + " " + list.toString());
     } else {
       rcvFecPacket(rtp);
     }
@@ -166,7 +186,7 @@ public class FecHandler {
 
     // get RTP List
     ArrayList<Integer> list = fec.getRtpList();
-    System.out.println("FEC: set list: " + seqNrFec + " " + list.toString());
+    // System.out.println("FEC: set list: " + seqNrFec + " " + list.toString());
 
     // set list to get fec packet nr
     list.forEach((E) -> fecNr.put(E, seqNrFec)); // FEC-packet
@@ -214,20 +234,19 @@ public class FecHandler {
   private RTPpacket getRtp(int snr) {
     snr = snr % 0x10000; // account overflow of SNr (16 Bit)
     RTPpacket rtp = rtpStack.get(snr);
-    System.out.println("FEC: get RTP nr: " + snr);
+    // System.out.println("FEC: get RTP nr: " + snr);
 
     // check if correction is possible
     if (rtp == null) {
       System.out.println("FEC: Media lost: " + snr);
       nrLost++;
-      if (checkCorrection(snr) && useFec) {
+      if (useFec && checkCorrection(snr)) {
         nrCorrected++;
         System.out.println("---> FEC: correctable: " + snr);
         return correctRtp(snr);
       } else {
         nrNotCorrected++;
         System.err.println("---> FEC: not correctable: " + snr);
-        return null;
       }
     }
     return rtp;
@@ -257,12 +276,16 @@ public class FecHandler {
     //TODO lost RTPs are not in the list but could perhaps be corrected -> check for snr
     //add all RTPs but the first which is already included
     for (int i = 1; i < rtpList.size(); i++) {
-      list.add( getRtp(rtpList.get(i) ));
+      rtp = getRtp(rtpList.get(i));
+      if (rtp == null){
+        // try to correct rtppacket
+      }
+      list.add( rtp );
     }
     playCounter = playCounter + rtpList.size()-1; // set to snr of last packet
     //TODO if list is fragmented return null or implement JPEG error concealment
 
-    System.out.println("-> Get list of " + list.size() + " RTPs with TS: " + (0xFFFFFFFFL & ts));
+    // System.out.println("-> Get list of " + list.size() + " RTPs with TS: " + (0xFFFFFFFFL & ts));
     return list;
   }
 
@@ -273,8 +296,22 @@ public class FecHandler {
    * @return true if possible
    */
   private boolean checkCorrection(int nr) {
-    //TASK complete this method!
-    return false;
+    //TASK_F complete this method!
+    // get corresponding fec packet
+    FECpacket fec = fecStack.get( fecNr.get(nr) );
+    if (fec == null) return false;
+
+    // check if another involved media packets got lost
+    for (int snr : fecList.get( nr )){
+      try {
+        if (snr != nr && rtpStack.get(snr) == null) {
+          return false;
+        }
+      } catch (Exception e){
+        e.printStackTrace();
+      }
+    }
+    return true;
   }
 
   /**
@@ -285,6 +322,14 @@ public class FecHandler {
    */
   private RTPpacket correctRtp(int nr) {
     //TASK complete this method!
+    FECpacket fec = fecStack.get( fecNr.get(nr) );
+
+    for (int snr : fecList.get( nr )) {
+      RTPpacket packet = rtpStack.get(snr);
+      if (packet != null){
+        fec.addRtp(packet);
+      }
+    }
     return fec.getLostRtp(nr);
   }
 
@@ -295,6 +340,7 @@ public class FecHandler {
    */
   private void clearStack(int nr) {
     //TASK complete this method!
+
   }
 
   // *************** Receiver Statistics ***********************************************************
