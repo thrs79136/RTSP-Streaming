@@ -83,13 +83,13 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
 
     // Handler to close the main window
     addWindowListener(
-        new WindowAdapter() {
-          public void windowClosing(WindowEvent e) {
-            // stop the timer and exit
-            timer.stop();
-            System.exit(0);
-          }
-        });
+            new WindowAdapter() {
+              public void windowClosing(WindowEvent e) {
+                // stop the timer and exit
+                timer.stop();
+                System.exit(0);
+              }
+            });
 
     // GUI:
     label = new JLabel("Send frame #        ", JLabel.CENTER);
@@ -129,11 +129,11 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
       if (source.getName().equals("k")) {
         int k = source.getValue();
         fec.setFecGroupSize(k);
-        //System.out.println("New Group size: " + k);
+        System.out.println("New Group size: " + k);
       } else {
         lossRate = source.getValue();
         lossRate = lossRate / 100;
-        //System.out.println("New packet error rate: " + lossRate);
+        System.out.println("New packet error rate: " + lossRate);
       }
     }
   }
@@ -165,9 +165,9 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
 
     // Set input and output stream filters:
     RTSPBufferedReader =
-        new BufferedReader(new InputStreamReader(theServer.RTSPsocket.getInputStream()));
+            new BufferedReader(new InputStreamReader(theServer.RTSPsocket.getInputStream()));
     RTSPBufferedWriter =
-        new BufferedWriter(new OutputStreamWriter(theServer.RTSPsocket.getOutputStream()));
+            new BufferedWriter(new OutputStreamWriter(theServer.RTSPsocket.getOutputStream()));
 
 
     int request_type;
@@ -182,7 +182,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
           // Wait for the SETUP message from the client
           state = READY;
           stateLabel.setText("READY");
-          //System.out.println("New RTSP state: READY");
+          System.out.println("New RTSP state: READY");
 
           // Send response
           theServer.send_RTSP_response(SETUP);
@@ -205,7 +205,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
             // update state
             state = PLAYING;
             stateLabel.setText("PLAY");
-            //System.out.println("New RTSP state: PLAYING");
+            System.out.println("New RTSP state: PLAYING");
           }
           break;
 
@@ -218,7 +218,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
             // update state
             state = READY;
             stateLabel.setText("READY");
-            //System.out.println("New RTSP state: READY");
+            System.out.println("New RTSP state: READY");
           }
           break;
 
@@ -235,12 +235,12 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
           break;
 
         case OPTIONS:
-          //System.out.println("Options request");
+          System.out.println("Options request");
           theServer.send_RTSP_response(OPTIONS);
           break;
 
         case DESCRIBE:
-          //System.out.println("DESCRIBE Request");
+          System.out.println("DESCRIBE Request");
           theServer.send_RTSP_response(DESCRIBE);
           break;
 
@@ -262,7 +262,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
     try {
       byte[] frame = video.readNextImage(); // get next frame
       if (frame != null) {
-        //System.out.println("Frame size: " + frame.length);
+        System.out.println("Frame size: " + frame.length);
 
         // Build RTP-JPEG RFC 2435
         JpegFrame jpegFrame = JpegFrame.getFromJpegBytes(frame);
@@ -271,7 +271,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
         // Builds an RTPpacket object containing the frame
         if (imagenb==4) System.out.println("server.java");
         RTPpacket rtp_packet =
-            new RTPpacket(MJPEG_TYPE, imagenb, imagenb * FRAME_PERIOD, frame, frame.length);
+                new RTPpacket(MJPEG_TYPE, imagenb, imagenb * FRAME_PERIOD, frame, frame.length);
 
         // retrieve the packet bitstream as array of bytes
         packet_bits = rtp_packet.getpacket();
@@ -286,7 +286,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
         // FEC handling
         fec.setRtp(rtp_packet);
         if (fec.isReady()) {
-          //System.out.println("FEC-Encoder ready...");
+          System.out.println("FEC-Encoder ready...");
           packet_bits = fec.getPacket();  // print Header
           // fec.printHeaders();
           // send to the FEC dest_port
@@ -314,13 +314,13 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
     else label = " media ";
     // TASK_F correct the if-instruction to work properly
     if (random.nextDouble() > lossRate) {
-      //System.out.println("Send frame: " + imagenb + label);
+      System.out.println("Send frame: " + imagenb + label);
       RTPsocket.send(senddp);
     } else {
       // System.err.println("Dropped frame: " + imagenb + label);
       if (!fec) dropCounter++;
     }
-    // System.out.println("Drop count media packets: " +  dropCounter);
+    System.out.println("Drop count media packets: " +  dropCounter);
   }
 
   /**
@@ -331,11 +331,11 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
   private int parse_RTSP_request() {
     int request_type = -1;
     try {
-      //System.out.println("*** wait for RTSP-Request ***");
+      System.out.println("*** wait for RTSP-Request ***");
       // parse request line and extract the request_type:
       String RequestLine = RTSPBufferedReader.readLine();
-      // System.out.println("RTSP Server - Received from Client:");
-      //System.out.println(RequestLine);
+      System.out.println("RTSP Server - Received from Client:");
+      System.out.println(RequestLine);
 
       StringTokenizer tokens = new StringTokenizer(RequestLine);
       String request_type_string = tokens.nextToken();
@@ -369,36 +369,36 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
         String[] tok = dir.split("/");
         //VideoFileName = VideoDir + tok[1];
         VideoFileName = VideoDir + tok[3];
-        //System.out.println("File: " + VideoFileName);
+        System.out.println("File: " + VideoFileName);
       }
 
       // parse the SeqNumLine and extract CSeq field
       String SeqNumLine = RTSPBufferedReader.readLine();
-      //System.out.println(SeqNumLine);
+      System.out.println(SeqNumLine);
       tokens = new StringTokenizer(SeqNumLine);
       tokens.nextToken();
       RTSPSeqNb = Integer.parseInt(tokens.nextToken());
 
       // get LastLine
       String LastLine = RTSPBufferedReader.readLine();
-      //System.out.println(LastLine);
+      System.out.println(LastLine);
 
       if (request_type == SETUP) {
         // extract RTP_dest_port after Char "="
         RTP_dest_port = Integer.parseInt( LastLine.split("=")[1].split("-")[0] );
         FEC_dest_port = RTP_dest_port + 0;
-        //System.out.println("Client-Port: " + RTP_dest_port);
+        System.out.println("Client-Port: " + RTP_dest_port);
       }
       // else LastLine will be the SessionId line ... do not check for now.
 
       // Read until end of request (empty line)
       while (!LastLine.equals("")) {
 
-        //System.out.println(LastLine);
+        System.out.println(LastLine);
         LastLine = RTSPBufferedReader.readLine();
 
       }
-      //System.out.println("*** End of Request ***\n");
+      System.out.println("*** End of Request ***\n");
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -414,7 +414,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
    * @param method RTSP-Method
    */
   private void send_RTSP_response(int method) {
-    //System.out.println("*** send RTSP-Response ***");
+    System.out.println("*** send RTSP-Response ***");
     try {
       RTSPBufferedWriter.write("RTSP/1.0 200 OK" + CRLF);
       RTSPBufferedWriter.write("CSeq: " + RTSPSeqNb + CRLF);
@@ -432,7 +432,7 @@ public class Server extends JFrame implements ActionListener, ChangeListener {
       // Send end of response
       if (method != DESCRIBE) RTSPBufferedWriter.write(CRLF);
       RTSPBufferedWriter.flush();
-      //System.out.println("*** RTSP-Server - Sent response to Client ***");
+      System.out.println("*** RTSP-Server - Sent response to Client ***");
 
     } catch (Exception ex) {
       ex.printStackTrace();

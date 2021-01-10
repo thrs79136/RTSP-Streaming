@@ -96,7 +96,6 @@ public class FECpacket extends RTPpacket {
    */
   public FECpacket(int PType, int Framenb, int Time, int maxGroupSize, int snBase) {
     super(PType, Framenb, Time, new byte[0], 0);
-    if (Framenb==4) System.out.println("after super FECPacket.java");
     setFecHeader(maxGroupSize, snBase);
     setUlpLevelHeader(0,0,maxGroupSize);
   }

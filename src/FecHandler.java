@@ -234,19 +234,18 @@ public class FecHandler {
   private RTPpacket getRtp(int snr) {
     snr = snr % 0x10000; // account overflow of SNr (16 Bit)
     RTPpacket rtp = rtpStack.get(snr);
-    // System.out.println("FEC: get RTP nr: " + snr);
 
     // check if correction is possible
     if (rtp == null) {
-      System.out.println("FEC: Media lost: " + snr);
+      //System.out.println("FEC: Media lost: " + snr);
       nrLost++;
       if (useFec && checkCorrection(snr)) {
         nrCorrected++;
-        System.out.println("---> FEC: correctable: " + snr);
+        //System.out.println("---> FEC: correctable: " + snr);
         return correctRtp(snr);
       } else {
         nrNotCorrected++;
-        System.err.println("---> FEC: not correctable: " + snr);
+        //System.err.println("---> FEC: not correctable: " + snr);
       }
     }
     return rtp;
@@ -299,7 +298,9 @@ public class FecHandler {
     //TASK_F complete this method!
     // get corresponding fec packet
     FECpacket fec = fecStack.get( fecNr.get(nr) );
-    if (fec == null) return false;
+    if (fec == null){
+      return false;
+    }
 
     // check if another involved media packets got lost
     for (int snr : fecList.get( nr )){

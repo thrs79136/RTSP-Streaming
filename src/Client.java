@@ -169,6 +169,8 @@ public class Client {
     rtspServer = ServerHost;
     rtspUrl = "rtsp://" + ServerHost + ":" + RTSP_server_port + "/";
 
+    System.out.println(rtspUrl);
+
     // get video filename to request:
     VideoFileName = argv[2];
     theClient.textField.setText(VideoFileName);
@@ -229,7 +231,7 @@ public class Client {
         send_RTSP_request("SETUP");
 
         // Wait for the response
-        // System.out.println("Wait for response...");
+        System.out.println("Wait for response...");
         if (parse_server_response() != 200) System.out.println("Invalid Server Response");
         else {
           // TASK_FINISHED change RTSP state and print new state to console and statusLabel
@@ -259,7 +261,7 @@ public class Client {
           //TASK_F change RTSP state and print out new state to console an statusLabel
           state = PLAYING;
           statsLabel.setText("STATUS: PLAYING");
-          // System.out.println("New RTSP state: PLAYING");
+          System.out.println("New RTSP state: PLAYING");
 
           // start the timer
           timer.start();
@@ -287,7 +289,7 @@ public class Client {
           // TASK_F change RTSP state and print out new state to console and statusLabel
           state = READY;
           statsLabel.setText("STATUS: READY");
-          // System.out.println("New RTSP state: READY");
+          System.out.println("New RTSP state: READY");
 
           // stop the timer
           timer.stop();
@@ -316,7 +318,7 @@ public class Client {
         // TASK_F change RTSP state and print out new state to console and statusLabel
         state = INIT;
         statsLabel.setText("STATUS: INIT");
-        // System.out.println("New RTSP state: INIT");
+        System.out.println("New RTSP state: INIT");
 
         // stop the timer
         timer.stop();
@@ -364,7 +366,7 @@ public class Client {
         RTPpacket rtp = new RTPpacket(rcvDp.getData(), rcvDp.getLength()); // for the rcvDp
 
         // print important header fields of the RTP packet received:
-/*        System.out.println(
+        System.out.println(
             "---------------- Receiver -----------------------"
                 + nl
                 + "Got RTP packet with SeqNum # "
@@ -373,14 +375,14 @@ public class Client {
                 + (0xFFFFFFFFL & rtp.gettimestamp()) // cast to long
                 + " ms, of type "
                 + rtp.getpayloadtype()
-                + " Size: " + rtp.getlength());*/
+                + " Size: " + rtp.getlength());
 
         // TASK_F remove comment for debugging
         // rtp.printheader(); // print rtp header bitstream for debugging
         fec.rcvRtpPacket(rtp); // stores the received RTP packet in jitter buffer
 
       } catch (InterruptedIOException iioe) {
-        // System.out.println("Nothing to read");
+        System.out.println("Nothing to read");
       } catch (IOException ioe) {
         System.out.println("Exception caught: " + ioe);
       }
@@ -441,7 +443,7 @@ public class Client {
       DecimalFormat df = new DecimalFormat("###.###");
       pufferLabel.setText(
           "Puffer: "
-              + ""  //
+              + (fec.getSeqNr() - fec.getPlayCounter()) //
               + " aktuelle Nr. / Summe empf.: "
               + fec.getSeqNr() + " / " + fec.getNrReceived()
               + "");
@@ -477,7 +479,7 @@ public class Client {
     int reply_code = 0;
     int cl = 0;
 
-    // System.out.println("Waiting for Server response...");
+    System.out.println("Waiting for Server response...");
     try {
       // parse the whole reply
       ArrayList<String> respLines = new ArrayList<>();
@@ -485,7 +487,7 @@ public class Client {
       String line;
       do {
         line = RTSPBufferedReader.readLine();
-        // System.out.println(line);
+        System.out.println(line);
         if (!line.equals("")) respLines.add(line);
       } while (!line.equals(""));
       ListIterator<String> respIter = respLines.listIterator(0);
@@ -500,7 +502,7 @@ public class Client {
 
         switch (headerField.nextToken().toLowerCase()) {
           case "cseq:":
-            // System.out.println("SNr: " + headerField.nextToken());
+            System.out.println("SNr: " + headerField.nextToken());
             break;
 
           case "session:":
@@ -511,7 +513,7 @@ public class Client {
 
           case "content-length:":
             cl = Integer.parseInt(headerField.nextToken());
-            // System.out.println("Content length: " + Integer.toString(cl));
+            System.out.println("Content length: " + Integer.toString(cl));
             break;
 
           case "public:":
@@ -532,7 +534,7 @@ public class Client {
             System.out.println("Unknown: " + line);
         }
       }
-      // System.out.println("*** End of Response Header ***\n----------------");
+      System.out.println("*** End of Response Header ***\n----------------");
 
       // Describe will send content
       if (cl > 0) parse_server_data(cl);
@@ -587,15 +589,15 @@ public class Client {
         rtspReq += "Session: " + RTSPid + CRLF;
       }
 
-      // System.out.println(rtspReq); // console debug
+      System.out.println(rtspReq); // console debug
       // Use the RTSPBufferedWriter to write to the RTSP socket
       RTSPBufferedWriter.write(rtspReq + CRLF);
       RTSPBufferedWriter.flush();
-      // System.out.println("*** RTSP-Request " + request_type + " send ***");
+      System.out.println("*** RTSP-Request " + request_type + " send ***");
 
     } catch (Exception ex) {
       ex.printStackTrace();
-      // System.out.println("Exception caught: " + ex);
+      System.out.println("Exception caught: " + ex);
       System.exit(0);
     }
   }
